@@ -1,0 +1,444 @@
+<header>
+  <div class="container-fluid px-0">
+    <nav class="navbar navbar-user navbar-expand-lg navbar-light navbar-sub">
+      <div class="container-fluid px-0">
+        <div class="compay-logo">
+          <a class="navbar-brand d-flex align-items-end" href="/">
+            <img src="images/micron-logo.svg" class="img-fluid" alt="" />
+            <h1 class="compay-name">MICRON ELECTRIC</h1>
+          </a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-sub"
+                aria-current="page"
+                href="/about-us"
+              >About Us</a>
+            </li>
+           <li class="nav-item dropdown position-relative">
+  <a class="nav-link nav-link-sub" href="#" id="productDropdown">Products</a>
+ <ul class="dropdown-menu multi-level py-0" id="mainCategoryDropdown" style="border: 1px solid #0000001A">
+  {{#each categories}}
+    <li class="dropdown-submenu">
+      <a class="dropdown-item main-cat" data-category="{{mainCategory}}" href="#">{{mainCategory}}</a>
+      <ul class="dropdown-menu sub-cat-menu py-0 border-0" style="border: 1px solid #0000001A"></ul>
+    </li>
+  {{/each}}
+</ul>
+</li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub download-active" href="/downloads">Downloads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub" href="/contact-us">Contact Us</a>
+            </li>
+           <a href="/contact-us">
+            <div class="nav-btn">
+              <button>GET A QUOTE</button>
+            </div>
+           </a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="about-hero-section">
+      <div class="downloads-hero-img d-flex align-items-center justify-content-center">
+        <div class="search-bar-title">
+            <h3>Search and download the latest catalogues</h3>
+           <div class="search-bar-sub"  style="position: relative;">
+  <input type="text" id="searchInput" placeholder="Search Product">
+  <div id="suggestionsBox" class="suggestions-box"></div>
+  <button class="search-button" type="button" id="searchButton">
+    <img src="/images/image (5).svg" alt="Search" />
+  </button>
+</div>
+
+        </div>
+      </div>
+    
+    </div>
+
+  </div>
+
+</header>
+
+<section>
+  <div class="container-fluid px-0">
+    <div class="category-downloads">
+     <div class="d-flex">
+       <h3 class="mb-4">CATEGORIES</h3>
+        <div class="catelog-btn">
+          <button>Download Catalogues</button>
+         </div>
+     </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="category-list" style="max-width: 0;">
+            <ul class="m-0 p-0" id="mainCategoryList">
+              {{#each categories}}
+                <li data-category-id="{{_id}}" class="main-category-item">
+                  <a href="javascript:void(0)"><b>{{mainCategory}}</b></a>
+                  <ul class="subcategory-list d-none mt-40">
+                    {{#each subCategories}}
+<a
+  href="javascript:void(0)"
+  class="subcategory-link"
+  data-subcategory="{{this}}"
+  data-parent-main="{{../mainCategory}}">
+  {{this}}
+</a>
+                    {{/each}}
+                  </ul>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-9" style="padding: 0 60px; product-row">
+        
+          <div class="row" id="productRow">
+            <!-- Each product will be appended inside a <div class="col"> here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container-fluid px-0">
+    <div class="footer-container">
+      <div class="logo-div">
+        <img src="images/Group 80.svg" alt="">
+      </div>
+      <div class="row">
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="quick-link-section text-white">
+          <div class="quick-link-title">
+            <h5>QUICK LINKS</h5>
+          </div>
+          <div class="quick-links">
+            <ul>
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Products</li>
+              <li>Downloads</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="address-section text-white">
+            <div class="address-title">
+              <h5>ADDRESS</h5>
+            </div>
+            <div class="address-list">
+              <ul><li class="address-1 d-flex">
+                <img src="images/image 55 (1).svg" alt="">
+                <h6>MICRON ELECTRIC LTD 20-22 <br> Wenlock Road MICRON ELECTRIC <br> LTD London N1 7GU</h6>
+              </li>
+              <li class="address-1 d-flex">
+                <img src="images/image 56.svg" alt="">
+               <div>
+                 <p class="mb-0">9807 654 345</p> 
+                <p>9807 654 345</p>
+               </div>
+              </li>
+              <li class="address-1 d-flex">
+                <img src="images/image 57.svg" alt="">
+                <h6>micronelecrical@gmail.com</h6>
+              </li>
+              </ul>
+            </div>
+           
+          </div>
+        </div>
+       <div class="d-flex justify-content-center">
+          <hr class="text-white" style="width:90%;">
+       </div>
+       <div class="terms-conditions text-white d-flex justify-content-center">
+        <p>©️ 2024 All Rights Reserved. Developed by canyon Technologies</p>
+       </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const products = {{{productsJSON}}}; // Injected product list
+  const searchInput = document.getElementById('searchInput');
+  const suggestionsBox = document.getElementById('suggestionsBox');
+  const searchButton = document.getElementById('searchButton');
+  let selectedValue = '';
+
+  // Show suggestions on input
+  searchInput.addEventListener('input', () => {
+    const value = searchInput.value.trim().toLowerCase();
+    suggestionsBox.innerHTML = '';
+    suggestionsBox.style.display = 'none';
+    if (!value) return;
+
+    const filtered = products.filter(p =>
+      p.p_name.toLowerCase().includes(value) ||
+      p.p_code?.toLowerCase().includes(value)
+    );
+
+    if (filtered.length > 0) {
+      suggestionsBox.style.display = 'block';
+    }
+
+    filtered.slice(0, 5).forEach(p => {
+      const div = document.createElement('div');
+      div.textContent = `${p.p_name} (${p.p_code})`;
+      div.addEventListener('click', () => {
+        selectedValue = p.p_name;
+        searchInput.value = selectedValue;
+        suggestionsBox.innerHTML = '';
+        suggestionsBox.style.display = 'none';
+      });
+      suggestionsBox.appendChild(div);
+    });
+  });
+
+  // Hide suggestions on outside click
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.search-bar-sub')) {
+      suggestionsBox.innerHTML = '';
+      suggestionsBox.style.display = 'none';
+    }
+  });
+
+  // Submit button click
+  searchButton.addEventListener('click', () => {
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    if (!searchQuery) {
+      Swal.fire({
+    icon: 'warning',
+    title: 'Oops...',
+    text: 'Please enter a product name or code',
+  });
+  return;
+    }
+
+    const match = products.find(p =>
+      p.p_name.toLowerCase() === searchQuery ||
+      (p.p_code && p.p_code.toLowerCase() === searchQuery)
+    );
+
+    if (!match) {
+      alert('No matching product found');
+      return;
+    }
+
+    // Redirect to single product page using its _id
+    window.location.href = `/single-product/${match._id}`;
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const mainItems = document.querySelectorAll(".main-category-item");
+
+  mainItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const subList = item.querySelector(".subcategory-list");
+
+      // Toggle visibility
+      if (subList.classList.contains("d-none")) {
+        // Hide other open subcategory lists
+        document.querySelectorAll(".subcategory-list").forEach(list => list.classList.add("d-none"));
+
+        subList.classList.remove("d-none");
+      } else {
+        subList.classList.add("d-none");
+      }
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const products = {{{productsJSON}}}; // JSON injected from the backend
+  const productRow = document.getElementById('productRow');
+  
+  // Automatically show the subcategories for the first main category
+  const firstMainItem = document.querySelector('.main-category-item');
+  if (firstMainItem) {
+    const firstSubList = firstMainItem.querySelector('.subcategory-list');
+    if (firstSubList) {
+      firstSubList.classList.remove('d-none'); // Show the subcategories of the first main category
+    }
+
+    // Automatically trigger the click on the first subcategory to load products
+    const firstSubLink = firstSubList.querySelector('.subcategory-link');
+    if (firstSubLink) {
+      firstSubLink.click(); // Simulate a click on the first subcategory link to show products
+    }
+  }
+
+  // Toggle subcategory lists when a main category is clicked
+  document.querySelectorAll(".main-category-item").forEach(item => {
+    item.addEventListener("click", () => {
+      document.querySelectorAll(".subcategory-list").forEach(list => list.classList.add("d-none"));
+      const subList = item.querySelector(".subcategory-list");
+      if (subList) subList.classList.remove("d-none");
+    });
+  });
+
+  // On subcategory click: show products in the row and mark the active subcategory
+document.querySelectorAll('.subcategory-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const subcategory = link.getAttribute('data-subcategory');
+    const mainCategory = link.getAttribute('data-parent-main');
+
+    const filteredProducts = products.filter(p =>
+      p.p_subcategory === subcategory && p.p_category === mainCategory
+    );
+
+    // Remove 'active' class from all subcategory links
+    document.querySelectorAll('.subcategory-link').forEach(l => {
+      l.classList.remove('active');
+    });
+
+    // Add 'active' class to the clicked subcategory
+    link.classList.add('active');
+
+    renderProducts(filteredProducts);
+  });
+});
+
+
+  // Render filtered products
+function renderProducts(filteredProducts) {
+  productRow.innerHTML = '';
+
+  if (filteredProducts.length === 0) {
+    productRow.innerHTML = '<p class="text-muted">No products found for this subcategory.</p>';
+    return;
+  }
+
+  filteredProducts.forEach(p => {
+    const col = document.createElement('div');
+    col.className = 'col-md-4 col-lg-4 col-xl-3 mb-4 d-flex justify-content-center';
+
+    const box = document.createElement('div');
+    box.className = 'product-box p-0 position-relative';
+
+    // Trim description to 20 words
+    let description = '';
+    if (p.p_description) {
+      const words = p.p_description.split(/\s+/);
+      description = words.slice(0, 14).join(' ') + (words.length > 14 ? '…' : '');
+    }
+
+    box.innerHTML = `
+      <img src="${p.product_image_url}" alt="${p.p_name}" style="width: 100%;
+        max-width: 260px;
+        height:205px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;" />
+      <h5 class="productCat-name">${p.p_name}</h5>
+      <p class="productCat-desc">${description}</p>
+      <button class="product-download">
+        <a href="${p.product_pdf_url}" download class="btn mt-2 d-block product-download" style="color:white">
+        Download
+      </a>
+      </button>
+    `;
+
+    col.appendChild(box);
+    productRow.appendChild(col);
+  });
+}
+
+
+
+  // Trigger click on the first subcategory after a slight delay to ensure DOM elements are loaded
+  setTimeout(() => {
+    const firstSubLink = document.querySelector('.subcategory-link');
+    if (firstSubLink) {
+      firstSubLink.click(); // Trigger click to load products
+    }
+  }, 200);
+});
+</script>
+<script>
+  const categories = {{{categoriesJSON}}};
+const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+
+document.querySelectorAll('.main-cat').forEach(mainCatElem => {
+  mainCatElem.addEventListener('mouseenter', function () {
+    const mainCategory = this.dataset.category;
+    const category = categories.find(cat => cat.mainCategory === mainCategory);
+    const subMenu = this.nextElementSibling;
+
+    // Clear previous subcategories
+    subMenu.innerHTML = '';
+
+    if (category && Array.isArray(category.subCategories)) {
+      category.subCategories.forEach(sub => {
+        const li = document.createElement('li');
+        
+        // Each subcategory link with data attribute
+        li.innerHTML = `
+          <a class="dropdown-item sub-cat" href="#" data-main-category="${mainCategory}" data-subcategory="${sub}">${sub}</a>
+          <ul class="dropdown-menu product-menu py-0 border-0" style="border: 1px solid #0000001A; display:none;"></ul>
+        `;
+        subMenu.appendChild(li);
+
+        // Add hover event to subcategory link to load products
+        const subCatLink = li.querySelector('.sub-cat');
+        const productMenu = li.querySelector('.product-menu');
+
+        subCatLink.addEventListener('mouseenter', () => {
+          // Clear previous products
+          productMenu.innerHTML = '';
+          productMenu.style.display = 'block';
+
+          // Find products matching mainCategory and subcategory
+          const matchingProducts = products.filter(p => 
+            p.p_category === mainCategory && p.p_subcategory === sub
+          );
+
+          if (matchingProducts.length > 0) {
+            matchingProducts.forEach(product => {
+              const prodLi = document.createElement('li');
+              prodLi.innerHTML = `<a class="dropdown-item" href="/single-product/${product._id}">${product.p_name}</a>`;
+              productMenu.appendChild(prodLi);
+            });
+          } else {
+            productMenu.innerHTML = '<li class="dropdown-item disabled">No products found</li>';
+          }
+        });
+
+        // Optional: hide product submenu when mouse leaves subcategory link or submenu
+        li.addEventListener('mouseleave', () => {
+          productMenu.style.display = 'none';
+        });
+      });
+    }
+  });
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+

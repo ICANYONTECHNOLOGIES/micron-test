@@ -1,0 +1,983 @@
+<div class="wrapper">
+  <nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+      <a class="sidebar-brand" href="index.html">
+        <span class="align-middle">MICRON</span>
+      </a>
+
+      <ul class="sidebar-nav">
+        <li class="sidebar-header">
+          Pages
+        </li>
+
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/dashboard-view">
+            <i class="align-middle" data-feather="sliders"></i>
+            <span class="align-middle">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="sidebar-item active">
+          <a class="sidebar-link" href="/admin/product-view">
+            <i class="align-middle" data-feather="shopping-cart"></i><span
+              class="align-middle"
+            >Product</span>
+          </a>
+        </li>
+
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/category-view">
+            <i class="align-middle" data-feather="grid"></i>
+            <span class="align-middle">Category</span>
+          </a>
+        </li>
+
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/tags-view">
+            <i class="align-middle" data-feather="tag"></i>
+            <span class="align-middle">Tag</span>
+          </a>
+        </li>
+
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/sub-admin">
+            <i class="align-middle" data-feather="user-plus"></i>
+            <span class="align-middle">Sub-Admin</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main">
+    <nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+								
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+								
+								
+							
+							</div>
+						</li>
+						
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                <img src="/images/icons8-administrator-male-48.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /><b><span id="adminName" class="text-dark"></span></b>
+
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="/admin/dashboard-view"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<a class="dropdown-item" href="#" id="logoutButton">
+  <i class="align-middle me-1" data-feather="log-out"></i> Logout
+</a>
+
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+    <div class="container-fluid px-0">
+      <div class="add-product_container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="add-product-section">
+              
+              <div class="form-wrapper">
+                <div class="add-product_title text-center">
+                <h3>Add Product</h3>
+              </div>
+                <form
+                id="productForm"
+                  action="/api/products"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  class="p-4 "
+                >
+                  <!-- Product Name -->
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control form-custom"
+                      id="p_name"
+                      name="p_name"
+					  placeholder="Product Name"
+                      required
+                    />
+                  </div>
+
+                  <!-- Product Code & Tag -->
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <input
+                        type="text"
+                        class="form-control form-custom"
+                        id="p_code"
+                        name="p_code"
+						placeholder="Product Code"
+                        required
+                      />
+                    </div>
+                   <div class="col-md-6">
+                      <select
+                        class="form-select form-custom"
+                        id="p_category"
+                        name="p_category"
+                        required
+                      >
+                        <option value="">Select Tag</option>
+                       {{#each tags}}
+					    <option value="{{productTag}}">{{productTag}}</option>
+                       {{/each}}
+                        <!-- Dynamically generate if needed -->
+                      </select>
+                    </div>
+                  </div>
+ <!-- Category and Subcategory Selection -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <select id="main_category" name="p_category" class="form-select form-custom" required>
+        <option value="">Select Category</option>
+        {{#each categories}}
+          <option value="{{this.mainCategory}}">{{this.mainCategory}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <select id="p_subcategory" name="p_subcategory" class="form-select form-custom" required>
+        <option value="">Select Subcategory</option>
+      </select>
+    </div>
+  </div>
+
+                  <!-- Product Description -->
+                  <div class="mb-3">
+                  
+                    <textarea
+                      class="form-control"
+                      id="p_description"
+                      name="p_description"
+                      rows="5"
+                      placeholder="Product Description"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <!-- Feature Title -->
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control form-custom"
+                      id="feature_title"
+                      name="feature_title"
+                      placeholder="Product Feature"
+                      required
+                    />
+                  </div>
+
+                  <!-- Feature Points -->
+           <!-- Input Field for Feature Points -->
+<!-- Feature Points Input -->
+<div class="mb-3">
+  <input
+    type="text"
+    class="form-control form-custom"
+    id="feature_points_input"
+    placeholder="Type a point and press Enter"
+  />
+</div>
+
+<ul id="feature_points_list" class="ps-4 mb-3"></ul>
+
+<div id="hidden_feature_points"></div>
+
+
+
+                   <div class="d-flex justify-content-center">
+                    <label for="categoryImage" class="product-img" id="imagePreviewBox">
+                      <span id="defaultText">Add a photo +</span>
+                      <img src="/images/image 55.svg" class="label-img" alt="Placeholder" id="previewImage" />
+                    </label>
+                    <input type="file" id="categoryImage" accept="image/*" required />
+                  </div>
+
+                  <!-- Product PDF Upload -->
+                  <div class="mb-3">
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="product_pdf"
+                      name="product_pdf"
+                      accept=".pdf"
+                      required
+                    />
+                  </div>
+
+
+                  <!-- Submit Button -->
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="product-add-btn" id="submitBtn">
+                      <span id="button-text">Submit</span>
+                      <div id="loading-spinner" class="text-center mt-1" style="display: none">
+                        <div class="spinner-border small-spinner" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+           <div class="category-listing" style="height:93vh; overflow-y: auto;">
+                <div class="category-list-style d-flex justify-content-center">
+                  <h3 class="text-center">Products</h3>
+                </div>
+   {{#each products}}
+  <div class="list-box d-flex justify-content-between align-items-center position-relative p-2 mb-2" style="border: 1px solid #ddd; border-radius: 5px; width:;">
+   <div onclick='openEditModal({{json this}})' style="cursor: pointer; flex-grow: 1;">
+  <h6 class="mb-0 text-center">
+    <div class="category-item">{{this.p_name}}</div>
+  </h6>
+</div>
+
+    
+    <!-- Close (X) button -->
+<button class="position-absolute"
+  style="
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid red;
+    background: transparent;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  "
+  onclick="event.stopPropagation(); deleteProduct('{{_id}}', '{{p_name}}')">
+  ❌
+</button>
+
+
+
+  </div>
+  {{/each}}
+
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{! <footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> &copy;
+							</p>
+						</div>
+						<div class="col-6 text-end">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer> }}
+  </div>
+</div>
+<!-- Embed your categories as JS -->
+
+
+{{!-- product-edit-modal-start --}}
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-3" style="background-color: #ffffff;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editProductForm">
+          <input type="hidden" id="editProductId" />
+
+          <div class="mb-3">
+            <label for="editProductName" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="editProductName" />
+          </div>
+
+          <div class="mb-3">
+            <label for="editProductCode" class="form-label">Product Code</label>
+            <input type="text" class="form-control" id="editProductCode" />
+          </div>
+
+          <div class="mb-3">
+            <label for="editProductTag" class="form-label">Product Tag</label>
+            <input type="text" class="form-control" id="editProductTag" disabled/>
+          </div>
+
+         <div class="mb-3">
+  <label for="editProductCategory" class="form-label">Category</label>
+  <select class="form-select" id="editProductCategory" onchange="handleEditCategoryChange()">
+  <option value="">Select Category</option>
+</select>
+</div>
+
+<div class="mb-3">
+  <label for="editProductSubcategory" class="form-label">Subcategory</label>
+ <select class="form-select" id="editProductSubcategory">
+  <option value="">Select Subcategory</option>
+</select>
+</div>
+
+
+          <div class="mb-3">
+            <label for="editProductDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="editProductDescription" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="editFeatureTitle" class="form-label">Feature Title</label>
+            <input type="text" class="form-control" id="editFeatureTitle" />
+          </div>
+
+         <div class="mb-3">
+  <input
+    type="text"
+    class="form-control form-custom"
+    id="edit_feature_points_input"
+    placeholder="Type a point and press Enter"
+  />
+</div>
+
+<ul id="edit_feature_points_list" class="ps-4 mb-3"></ul>
+
+<!-- Hidden inputs for backend submission -->
+<div id="edit_hidden_feature_points"></div>
+
+
+          <div class="mb-3">
+            <label class="form-label">Current Product Image</label>
+            <div class="border rounded px-3 py-2">
+              <img 
+                id="editProductPreviewImage" 
+                src="" 
+                alt="Current Product Image" 
+                class="img-fluid w-100" 
+                style="max-height: 200px; object-fit: contain;" 
+                onclick="document.getElementById('editProductImageInput').click()" />
+            </div>
+            <input type="file" id="editProductImageInput" accept="image/*" style="display:none" onchange="previewProductImageEdit(event)" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Current Product PDF</label>
+            <div class="d-flex align-items-center gap-3">
+              <a id="editProductPdfLink" href="#" target="_blank" class="btn btn-outline-secondary btn-sm">View Current PDF</a>
+              <input type="file" id="editProductPdfInput" accept="application/pdf" />
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="cat-submit-btn" id="editProductSubmitBtn">
+              <span id="editProductButtonText">Update</span>
+              <div id="editProductLoadingSpinner" class="text-center mt-1" style="display: none;">
+                <div class="spinner-border small-spinner" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- product-edit-modal-end --}}
+
+
+{{!-- right before the closing </body> tag: --}}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Parse the JSON injected from the server
+    const categories = {{{categoriesJSON}}};
+    
+    const mainCategorySelect = document.getElementById('main_category');
+    const subCategorySelect = document.getElementById('p_subcategory');
+    
+    // Add event listener for category change
+    mainCategorySelect.addEventListener('change', () => {
+      // Clear out existing subcategory options
+      subCategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+      
+      // Get the selected main category
+      const selectedCategory = mainCategorySelect.value;
+      
+      if (!selectedCategory) return;
+      
+      // Find the matching category object
+      const categoryObject = categories.find(cat => cat.mainCategory === selectedCategory);
+      
+      // If found and has subcategories, add them to the dropdown
+      if (categoryObject && Array.isArray(categoryObject.subCategories)) {
+        categoryObject.subCategories.forEach(subCategory => {
+          const option = document.createElement('option');
+          option.value = subCategory;
+          option.textContent = subCategory;
+          subCategorySelect.appendChild(option);
+        });
+      }
+    });
+  });
+</script>
+ 
+
+ <script>
+document.getElementById("productForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const p_name         = document.getElementById("p_name").value.trim();
+  const p_code         = document.getElementById("p_code").value.trim();
+  const product_tag    = document.getElementById("p_category").value;
+  const p_category     = document.getElementById("main_category").value;
+  const p_subcategory  = document.getElementById("p_subcategory").value;
+  const p_description  = document.getElementById("p_description").value.trim();
+  const feature_title  = document.getElementById("feature_title").value.trim();
+  const product_pdf    = document.getElementById("product_pdf").files[0];
+  const product_image  = document.getElementById("categoryImage").files[0];
+
+  const submitText = document.getElementById("button-text");
+  const submitLoader = document.getElementById("loading-spinner");
+  const submitBtn = document.getElementById("submitBtn");
+
+  submitText.style.display = "none";
+  submitLoader.style.display = "block";
+  submitBtn.disabled = true;
+
+  const formData = new FormData();
+  formData.append("p_name", p_name);
+  formData.append("p_code", p_code);
+  formData.append("product_tag", product_tag);
+  formData.append("p_category", p_category);
+  formData.append("p_subcategory", p_subcategory);
+  formData.append("p_description", p_description);
+  formData.append("feature_title", feature_title);
+
+  // ✅ Collect all feature points
+  document.querySelectorAll("input[name='feature_points[]']").forEach(input => {
+    formData.append("feature_points[]", input.value);
+  });
+
+  if (product_pdf) {
+    formData.append("product_pdf", product_pdf);
+  }
+
+  if (product_image) {
+    formData.append("product_image", product_image);
+  }
+
+  setTimeout(async () => {
+    try {
+      const response = await fetch("/admin/add-product", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to add product");
+      }
+
+      Swal.fire({
+        title: "Success!",
+        text: "Product added successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        document.getElementById("productForm").reset();
+        window.location.reload();
+      });
+
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Something went wrong",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      restoreButton();
+    }
+  }, 2000);
+});
+
+function restoreButton() {
+  document.getElementById("button-text").style.display = "inline";
+  document.getElementById("loading-spinner").style.display = "none";
+  document.getElementById("submitBtn").disabled = false;
+}
+
+
+
+
+
+  const input = document.getElementById('categoryImage');
+  const previewImage = document.getElementById('previewImage');
+  const defaultText = document.getElementById('defaultText');
+
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        previewImage.setAttribute('src', this.result);
+        previewImage.style.display = 'block';
+        defaultText.style.display = 'none';
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("feature_points_input");
+    const list = document.getElementById("feature_points_list");
+    const hiddenWrapper = document.getElementById("hidden_feature_points");
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // Prevent form submit on Enter
+
+        const point = input.value.trim();
+        if (point === "") return;
+
+        // Create list item
+        const li = document.createElement("li");
+        li.className = "d-flex justify-content-between align-items-center mb-2";
+
+        // Bullet and text
+        const textSpan = document.createElement("span");
+        textSpan.innerHTML = `&#8226; ${point}`; // Bullet + text
+
+        // Remove button
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "btn btn-sm btn-outline-danger round ms-2";
+        removeBtn.textContent = "×";
+        removeBtn.onclick = function () {
+          li.remove();
+          hiddenInput.remove(); // Remove hidden input
+        };
+
+        // Append text and button to the list item
+        li.appendChild(textSpan);
+        li.appendChild(removeBtn);
+        list.appendChild(li);
+
+        // Hidden input to store for form submission
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "feature_points[]";
+        hiddenInput.value = point;
+        hiddenWrapper.appendChild(hiddenInput);
+
+        input.value = ""; // Clear input after adding
+      }
+    });
+  });
+</script>
+<script>
+  let categoriesData = [];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Parse category JSON and populate dropdown
+    categoriesData = {{{categoriesJSON}}};
+    const categorySelect = document.getElementById("editProductCategory");
+    categoriesData.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.mainCategory;
+      option.textContent = cat.mainCategory;
+      categorySelect.appendChild(option);
+    });
+
+    // Init feature point handlers (for both add & edit)
+    initFeaturePointHandler("edit_feature_points_input", "edit_feature_points_list", "edit_hidden_feature_points");
+
+    // Clear feature points when modal closes
+    const modalEl = document.getElementById("editProductModal");
+    modalEl.addEventListener("hidden.bs.modal", () => {
+      document.getElementById("edit_feature_points_list").innerHTML = '';
+      document.getElementById("edit_hidden_feature_points").innerHTML = '';
+      document.getElementById("edit_feature_points_input").value = '';
+    });
+  });
+
+  function handleEditCategoryChange() {
+    const selectedCategory = document.getElementById('editProductCategory').value;
+    const subCategorySelect = document.getElementById('editProductSubcategory');
+    subCategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+
+    const catObj = categoriesData.find(cat => cat.mainCategory === selectedCategory);
+    if (catObj && Array.isArray(catObj.subCategories)) {
+      catObj.subCategories.forEach(sub => {
+        const option = document.createElement('option');
+        option.value = sub;
+        option.textContent = sub;
+        subCategorySelect.appendChild(option);
+      });
+    }
+  }
+
+  function openEditModal(product) {
+  document.getElementById('editProductId').value = product._id;
+  document.getElementById('editProductName').value = product.p_name;
+  document.getElementById('editProductCode').value = product.p_code;
+  document.getElementById('editProductTag').value = product.product_tag;
+  document.getElementById('editProductDescription').value = product.p_description;
+  document.getElementById('editFeatureTitle').value = product.feature_title;
+  document.getElementById('editProductPreviewImage').src = product.product_image_url;
+
+  const pdfLink = document.getElementById('editProductPdfLink');
+  pdfLink.href = product.product_pdf_url;
+  pdfLink.textContent = "View Current PDF";
+
+  const categorySelect = document.getElementById('editProductCategory');
+  categorySelect.value = product.p_category;
+  handleEditCategoryChange();
+  setTimeout(() => {
+    document.getElementById('editProductSubcategory').value = product.p_subcategory;
+  }, 0);
+
+  // Feature points
+  try {
+    const points = Array.isArray(product.feature_points)
+      ? product.feature_points
+      : product.feature_points.split(',').map(p => p.trim());
+    populateFeaturePoints("edit", points);
+  } catch (err) {
+    console.error("Feature points parse error", err);
+  }
+
+  const modal = new bootstrap.Modal(document.getElementById('editProductModal'));
+  modal.show();
+}
+
+
+  function initFeaturePointHandler(inputId, listId, hiddenWrapperId) {
+    const input = document.getElementById(inputId);
+    const list = document.getElementById(listId);
+    const hiddenWrapper = document.getElementById(hiddenWrapperId);
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const point = input.value.trim();
+        if (point === "") return;
+        addFeaturePoint(point, list, hiddenWrapper, input);
+        input.value = "";
+      }
+    });
+  }
+
+  function addFeaturePoint(point, list, hiddenWrapper, input) {
+    const li = document.createElement("li");
+    li.className = "d-flex justify-content-between align-items-center mb-2";
+
+    const textSpan = document.createElement("span");
+    textSpan.innerHTML = `&#8226; ${point}`;
+    textSpan.style.cursor = "pointer";
+    textSpan.onclick = function () {
+      input.value = point;
+      li.remove();
+      hiddenInput.remove();
+    };
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "btn btn-sm btn-outline-danger round ms-2";
+    removeBtn.textContent = "×";
+    removeBtn.onclick = function () {
+      li.remove();
+      hiddenInput.remove();
+    };
+
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "feature_points[]";
+    hiddenInput.value = point;
+
+    li.appendChild(textSpan);
+    li.appendChild(removeBtn);
+    list.appendChild(li);
+    hiddenWrapper.appendChild(hiddenInput);
+  }
+
+  function populateFeaturePoints(type, pointsArray) {
+    const list = document.getElementById(`${type}_feature_points_list`);
+    const hiddenWrapper = document.getElementById(`${type}_hidden_feature_points`);
+    const input = document.getElementById(`${type}_feature_points_input`);
+
+    list.innerHTML = '';  // Clear the list before adding new items
+    hiddenWrapper.innerHTML = '';  // Clear the hidden inputs
+
+    if (Array.isArray(pointsArray)) {
+      pointsArray.forEach(point => {
+        addFeaturePoint(point, list, hiddenWrapper, input);  // Add each feature point to the list
+      });
+    }
+  }
+</script>
+
+<script>
+document.getElementById('editProductForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append('id', document.getElementById('editProductId').value);
+  formData.append('name', document.getElementById('editProductName').value);
+  formData.append('code', document.getElementById('editProductCode').value);
+  formData.append('tag', document.getElementById('editProductTag').value);
+  formData.append('category', document.getElementById('editProductCategory').value);
+  formData.append('subcategory', document.getElementById('editProductSubcategory').value);
+  formData.append('description', document.getElementById('editProductDescription').value);
+  formData.append('featureTitle', document.getElementById('editFeatureTitle').value);
+
+  // Feature points
+  const featurePoints = [];
+  const featurePointsInputs = document.querySelectorAll('#edit_hidden_feature_points input');
+  featurePointsInputs.forEach(input => featurePoints.push(input.value));
+  formData.append('featurePoints', JSON.stringify(featurePoints));
+
+  // File uploads
+  const imageFile = document.getElementById('editProductImageInput').files[0];
+  const pdfFile = document.getElementById('editProductPdfInput').files[0];
+  if (imageFile) formData.append('image', imageFile);
+  if (pdfFile) formData.append('pdf', pdfFile);
+
+  // Button state
+  const submitText = document.getElementById("editProductButtonText");
+  const submitLoader = document.getElementById("editProductLoadingSpinner");
+  const submitBtn = document.getElementById("editProductSubmitBtn");
+
+  submitText.style.display = "none";
+  submitLoader.style.display = "block";
+  submitBtn.disabled = true;
+
+  setTimeout(async () => {
+    try {
+      const response = await fetch('/admin/edit-product', {
+        method: 'PUT',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to update product.');
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: 'Product updated successfully!',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        const modalEl = document.getElementById('editProductModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+        window.location.reload();
+      });
+
+    } catch (error) {
+      console.error('Error updating product:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.message || 'An error occurred while updating the product.',
+        confirmButtonText: 'OK'
+      });
+      restoreEditProductButton();
+    }
+  }, 2000); // Delay to show spinner
+});
+
+// Button reset function
+function restoreEditProductButton() {
+  document.getElementById("editProductButtonText").style.display = "block";
+  document.getElementById("editProductLoadingSpinner").style.display = "none";
+  document.getElementById("editProductSubmitBtn").disabled = false;
+}
+</script>
+
+<script>
+function previewProductImageEdit(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('editProductPreviewImage').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+</script>
+<script>
+  function deleteProduct(productId, productName) {
+    Swal.fire({
+      title: `Delete "${productName}"?`,
+      text: 'This product will be permanently deleted!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`/admin/delete-product/${productId}`, {
+            method: 'DELETE'
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.message || 'Failed to delete product');
+          }
+
+          Swal.fire({
+            title: 'Deleted!',
+            text: `"${productName}" was successfully deleted.`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            window.location.reload();
+          });
+
+        } catch (error) {
+          console.error('Delete error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: error.message || 'Something went wrong',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      }
+    });
+  }
+</script>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+  // Function to get cookie by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Check if admin is logged in by checking the "adminToken" cookie
+  const adminToken = getCookie("adminToken");
+
+  console.log("adminToken:", adminToken);  // Log adminToken to verify
+  
+  if (adminToken) {
+    // If the admin is logged in, redirect to the dashboard
+    window.location.href = "/admin/dashboard-view";
+  }
+
+  // Retrieve admin name from cookies
+  const adminName = getCookie("adminName");
+
+  console.log("adminName:", adminName);  // Log adminName to verify
+
+  // Set the admin name to the span with id "adminName" (if exists)
+  if (adminName) {
+    document.getElementById('adminName').textContent = adminName;
+  } else {
+    console.error("Admin Name not found in cookies.");
+  }
+
+  const logoutButton = document.getElementById('logoutButton');
+
+  // Logout functionality with SweetAlert confirmation
+  logoutButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent default link behavior
+
+    // Retrieve admin ID and name from cookies
+    const adminId = getCookie("adminId");
+
+    console.log("adminId:", adminId);  // Log adminId to verify
+
+    // If admin ID and name are found, show SweetAlert
+    if (adminId && adminName) {
+      Swal.fire({
+        title: `Are you sure, ${adminName}?`,
+        text: `You will be logged out of your account!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, logout!',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to logout route after confirmation
+          window.location.href = '/admin/logout'; // Or pass adminId if necessary
+        }
+      });
+    } else {
+      console.error("Admin ID or Admin Name not found in cookies.");
+    }
+  });
+});
+
+</script>
+
+<!-- SweetAlert2 CDN -->
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+

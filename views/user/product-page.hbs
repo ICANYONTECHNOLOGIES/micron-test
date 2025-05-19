@@ -1,0 +1,180 @@
+<header>
+  <div class="container-fluid px-0">
+    <nav class="navbar navbar-user navbar-expand-lg navbar-light navbar-sub">
+      <div class="container-fluid px-0">
+        <div class="compay-logo">
+          <a class="navbar-brand d-flex align-items-end" href="/">
+            <img src="images/micron-logo.svg" class="img-fluid" alt="" />
+            <h1 class="compay-name">MICRON ELECTRIC</h1>
+          </a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-sub"
+                aria-current="page"
+                href="/about-us"
+              >About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub product-active" href="/product-page">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub" href="/downloads">Downloads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub" href="/contact-us">Contact Us</a>
+            </li>
+           <a href="/contact-us">
+            <div class="nav-btn">
+              <button>GET A QUOTE</button>
+            </div>
+           </a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="about-hero-section">
+      <div class="about-mian-title">
+        <h1>Downloads</h1>
+      </div>
+      <div
+        class="product-hero-img d-flex align-items-center justify-content-center"
+      >
+        <div class="product-hero-title">
+          <h1>Relays & Control Devices</h1>
+          <h3>Plug-in Relays</h3>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+<section>
+  <div class="container">
+    <div class="product-list-section">
+      <div class="row">
+        {{#each products}}
+<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 d-flex justify-content-center">
+
+            <div class="product-box p-0" style="position: relative;">
+              <div class="product-card">
+                <div class="productCard-img">
+<img src="{{this.product_image_url}}" class="zoom-image" alt="" />
+                </div>
+                <div class="productCard-name">
+                  <h5>{{this.p_name}}</h5>
+                </div>
+               <div class="productCard-point">
+  <p class="product-description">{{this.p_description}}...</p>
+</div>
+
+                <div class="productCardBtn">
+<a href="/single-product/{{this._id}}"><button class="">Details
+                    <img src="images/Arrow 5.svg" alt="" />
+                  </button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container-fluid px-0">
+    <div class="footer-container">
+      <div class="logo-div">
+        <img src="images/Group 80.svg" alt="">
+      </div>
+      <div class="row">
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="quick-link-section text-white">
+          <div class="quick-link-title">
+            <h5>QUICK LINKS</h5>
+          </div>
+          <div class="quick-links">
+            <ul>
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Products</li>
+              <li>Downloads</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="address-section text-white">
+            <div class="address-title">
+              <h5>ADDRESS</h5>
+            </div>
+            <div class="address-list">
+              <ul><li class="address-1 d-flex">
+                <img src="images/image 55 (1).svg" alt="">
+                <h6>MICRON ELECTRIC LTD 20-22 <br> Wenlock Road MICRON ELECTRIC <br> LTD London N1 7GU</h6>
+              </li>
+              <li class="address-1 d-flex">
+                <img src="images/image 56.svg" alt="">
+               <div>
+                 <p class="mb-0">9807 654 345</p> 
+                <p>9807 654 345</p>
+               </div>
+              </li>
+              <li class="address-1 d-flex">
+                <img src="images/image 57.svg" alt="">
+                <h6>micronelecrical@gmail.com</h6>
+              </li>
+              </ul>
+            </div>
+           
+          </div>
+        </div>
+       <div class="d-flex justify-content-center">
+          <hr class="text-white" style="width:90%;">
+       </div>
+       <div class="terms-conditions text-white d-flex justify-content-center">
+        <p>©️ 2024 All Rights Reserved. Developed by canyon Technologies</p>
+       </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const descriptions = document.querySelectorAll(".product-description");
+
+    descriptions.forEach(p => {
+      const fullText = p.textContent.trim();
+      const words = fullText.split(/\s+/);
+      if (words.length > 14) {
+        const shortText = words.slice(0, 14).join(" ") + " ...";
+        p.textContent = shortText;
+      }
+    });
+  });
+</script>
+
+
+

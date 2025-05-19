@@ -1,0 +1,1139 @@
+<div id="loader">
+  <div class="spinner">
+    <img src="/images/micron-logo.svg" class="img-fluid" alt="" />
+    <div class="dot-loader">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<header>
+  <div class="container-fluid px-0">
+    <div class="main-hero-section">
+      <!-- Two background layers for crossfade effect -->
+      <div class="carousel-background"></div>
+      <div class="carousel-background-next"></div>
+
+      <!-- Navigation dots -->
+      <div class="carousel-number">
+        <ul>
+          <li class="active" data-index="0"></li>
+          <li data-index="1"></li>
+          <li data-index="2"></li>
+          <li data-index="3"></li>
+          <li data-index="4"></li>
+        </ul>
+      </div>
+
+      <nav class="navbar navbar-user navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <div class="compay-logo">
+            <a class="navbar-brand d-flex align-items-end" href="#">
+              <img src="images/micron-logo.svg" class="img-fluid" alt="" />
+              <h1 class="compay-name" style="z-index: 0;">MICRON ELECTRIC</h1>
+            </a>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link nav-link-user"
+                  aria-current="page"
+                  href="/about-us"
+                >About Us</a>
+              </li>
+<li class="nav-item dropdown position-relative">
+  <a class="nav-link nav-link-user" href="#" id="productDropdown">Products</a>
+ <ul class="dropdown-menu multi-level py-0" id="mainCategoryDropdown" style="border: 1px solid #0000001A">
+  {{#each categories}}
+    <li class="dropdown-submenu">
+      <a class="dropdown-item main-cat" data-category="{{mainCategory}}" href="#">{{mainCategory}}</a>
+      <ul class="dropdown-menu sub-cat-menu py-0 border-0" style="border: 1px solid #0000001A"></ul>
+    </li>
+  {{/each}}
+</ul>
+</li>
+
+
+
+
+
+
+
+
+              <li class="nav-item">
+                <a class="nav-link nav-link-user" href="/downloads">Downloads</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-user" href="/contact-us">Contact Us</a>
+              </li>
+              <a href="/contact-us">
+              <div class="nav-btn">
+                <button>GET A QUOTE</button>
+              </div></a>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-main">
+        <div class="hero-section-text">
+        <h1 class="dynamic-text"></h1>
+        <h1 class="static-text">quality solutions</h1>
+      </div>
+
+<form id="searchForm" action="">
+  <div class="search-bar">
+    <select class="category-select" id="categorySelect">
+      <option value="">Category</option>
+      {{#each categories}}
+      <option value="{{mainCategory}}">{{mainCategory}}</option>
+      {{/each}}
+    </select>
+
+    <input
+      type="text"
+      class="search-input"
+      id="searchInput"
+      placeholder="Search your product here"
+      autocomplete="off"
+    />
+
+    <button class="search-button" type="submit">
+      <img src="images/image (5).svg" alt="" />
+    </button>
+    <div>
+      <ul id="suggestionsList" class="list-group mt-4" style="z-index: 999;"></ul>
+    </div>
+  </div>
+</form>
+      </div>
+
+     
+
+<!-- Suggestions dropdown -->
+<div class="container sm-container">
+  <div class="single-quates-section-sm d-flex align-items-center justify-content-center">
+    <div class="quate-sm text-center">
+      <h5 class="quote-animated-text"></h5>
+    </div>
+  </div>
+</div>
+
+
+
+      <div class="single-quates-section text-white">
+        <div class="row">
+          <div class="col px-0">
+            <div class="quates-wrapper">
+              <h5 class="quate-one text-center">Impulse or manual control
+                <br />
+                from different locations.</h5>
+            </div>
+            <hr class="quets-hr-1" />
+          </div>
+          <div class="col px-0">
+            <div class="quates-wrapper">
+              <h5 class="text-center">Front handle provides <br /> direct manual operation.</h5>
+            </div>
+            <hr />
+          </div>
+          <div class="col px-0">
+            <div class="quates-wrapper">
+              <h5>Remote or local control is <br /> selectable by Auto.</h5>
+            </div>
+            <hr />
+          </div>
+          <div class="col px-0">
+            <div class="quates-wrapper">
+              <h5>Contact status is visible
+                <br />
+                through position of front.</h5>
+            </div>
+            <hr />
+          </div>
+          <div class="col px-0">
+            <div class="quates-wrapper">
+              <h5 class="quate-last">Low power consumption
+                <br />
+                for energy saving.</h5>
+            </div>
+            <hr class="quates-hr-5" />
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="who-we-are-section">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="who-we-are-partOne">
+            <h3>WHO WE ARE</h3>
+            <img src="images/who-we-are-img.svg" alt="" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="who-we-are-partTwo">
+            <p>At Micron Electric, we deliver complete solutions for the LV
+              switchgear industry. Since our establishment in 2017, we’ve been
+              committed to providing high-quality, reliable products that meet
+              the demands of modern industrial environments. We specialize in
+              the manufacturing and supply of premium electrical components,
+              built to power performance and ensure safety.
+            </p>
+            <button class="home-btn">Know more</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="category-section">
+        <div class="category-tile">
+          <h3>CATEGORIES</h3>
+        </div>
+
+        <div class="carousel-btn-wrapper">
+          <button
+            id="prevBtn"
+            class="carousel-btn d-flex align-items-center justify-content-center"
+          >
+            <img src="images/carousel-left-arrow.svg" alt="" />
+          </button>
+          <button
+            id="nextBtn"
+            class="carousel-btn d-flex align-items-center justify-content-center"
+          >
+            <img src="images/carousel-right-arrow.svg" alt="" />
+          </button>
+        </div>
+
+        <!--  Only ONE container -->
+        <div class="carousel-container">
+          <div class="carousel-wrapper">
+            <div class="carousel" id="carousel">
+              {{#each categories}}
+                <div class="box">
+                  <div class="carousel-img">
+                    <img src="{{imageUrl}}" alt="" />
+                    <h5 class="carousel-title">{{mainCategory}}</h5>
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+    
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="record-container">
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-center">
+          <div class="content-left">
+            <h2 class="section-title">Growing Company Network</h2>
+            <p class="section-text">
+              Since 2013, Micron Electric has grown into a trusted name across
+              the LV switchgear industry. What started as a small venture has
+              now expanded to operations in over 10 countries, with a strong
+              presence across key industrial markets. We offer a wide range of
+              500+ reliable electrical products, all designed to meet the
+              evolving needs of modern systems. With over 50,000 happy customers
+              and growing, our journey is driven by quality, service, and a deep
+              understanding of the field. We're proud to be powering progress,
+              one connection at a time.
+            </p>
+          </div>
+        </div>
+<div class="col-12 col-md-6 px-0">
+          <div class="content-right">
+            <div class="company-record">
+              <div class="row">
+                <div class="col record-col">
+                  <div class="since-record text-center">
+                    <div class="since-img">
+                      <img src="images/since-icon.svg" alt="" />
+                    </div>
+                    <h6 class="text-center">Our Journey Begins</h6>
+                    <h3 id="year-count">2010</h3>
+                  </div>
+                </div>
+                <div class="col record-col">
+                  <div class="since-record text-center">
+                    <div class="since-img">
+                      <img src="images/customer-icon.svg" alt="" />
+                    </div>
+                    <h6 class="text-center">Happy Customers</h6>
+                    <h3 id="customer-count">0</h3>
+                  </div>
+                </div>
+                <div class="col record-col">
+                  <div class="since-record text-center">
+                    <div class="since-img">
+                      <img src="images/project-icon.svg" alt="" />
+                    </div>
+                    <h6 class="text-center">Products</h6>
+                    <h3 id="project-count">0</h3>
+                  </div>
+                </div>
+                <div class="col record-col">
+                  <div class="since-record text-center">
+                    <div class="since-img">
+                      <img src="images/country-icon.svg" alt="" />
+                    </div>
+                    <h6 class="text-center">Countries</h6>
+                    <h3 id="country-count">0</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section>
+  <div class="container">
+    <div class="discover-product-container">
+      <div class="discover-section-title">
+        <h3>DISCOVER OUR PRODUCTS</h3>
+      </div>
+
+      <!-- Tag Filters -->
+      <!-- Tag Filters -->
+<div class="productItems-list">
+<ul id="tagFilter">
+  {{#each tags}}
+    <li data-tag="{{productTag}}">{{productTag}}</li>
+  {{/each}}
+</ul>
+
+<div class="row discover-product-row" id="productContainer"></div>
+
+</div>
+
+
+      <!-- Product Cards -->
+      <div class="row discover-product-row">
+
+      </div>
+
+      <div class="discover-product-btn d-flex justify-content-end">
+        <button class="discover-product-button">See more</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="right-choice-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Image & Title Section -->
+        <div class="col-12 col-md-4 mb-4 mb-md-0">
+          <div class="choice-left text-center text-md-start">
+            <h2>Why We’re the Right Choice</h2>
+            <img src="images/image (3).png" alt="" class="img-fluid" />
+          </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="col-12 col-md-8">
+          <div class="choice-right">
+            <div class="row gy-4">
+              <!-- Box 1 -->
+              <div class="col-sm-6">
+                <div class="choice-inner">
+                  <div class="choice-logo-wrapper d-flex justify-content-center align-items-center">
+                    <div class="choice-logo">
+                      <img src="images/product-safety-logo.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="choice-title">
+                    <h5>Uncompromised Safety <br /> Standards</h5>
+                  </div>
+                  <div class="choice-description">
+                    <p>
+                      All our products are designed and tested to meet strict safety regulations for reliable, worry-free operation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Box 2 -->
+              <div class="col-sm-6">
+                <div class="choice-inner">
+                  <div class="choice-logo-wrapper d-flex justify-content-center align-items-center">
+                    <div class="choice-logo">
+                      <img src="images/product-support-logo.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="choice-title">
+                    <h5>Certified and Trusted <br /> Quality</h5>
+                  </div>
+                  <div class="choice-description">
+                    <p>
+                      We use high-grade materials and certified processes to ensure long-lasting performance in every product.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Box 3 -->
+              <div class="col-sm-6">
+                <div class="choice-inner">
+                  <div class="choice-logo-wrapper d-flex justify-content-center align-items-center">
+                    <div class="choice-logo">
+                      <img src="images/product-safety-logo.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="choice-title">
+                    <h5>Wide Product <br /> Range</h5>
+                  </div>
+                  <div class="choice-description">
+                    <p>
+                      From control devices to protection systems, our 500+ products cover every key need in the LV switchgear field.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Box 4 -->
+              <div class="col-sm-6">
+                <div class="choice-inner">
+                  <div class="choice-logo-wrapper d-flex justify-content-center align-items-center">
+                    <div class="choice-logo">
+                      <img src="images/product-support-logo.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="choice-title">
+                    <h5>Customer-Centric <br /> Support</h5>
+                  </div>
+                  <div class="choice-description">
+                    <p>
+                      Our team is always ready to assist you with the right solutions, technical guidance, and after-sales care.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="industries-section">
+    <div class="container">
+      <div class="industries-title">
+        <h2>OUR industries</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries.</p>
+      </div>
+      <div class="industries-name-wrapper">
+        <div class="row">
+          <div class="col">
+            <div
+              class="industries-name-box d-flex align-items-center justify-content-center"
+            >
+              <div class="industries-name">
+                <h5>Switchgear manufacturing</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="industries-name-box d-flex align-items-center justify-content-center"
+            >
+              <div class="industries-name">
+                <h5>OEMS</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="industries-name-box d-flex align-items-center justify-content-center"
+            >
+              <div class="industries-name">
+                <h5>AIR CONDITIONING SYSTEM</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="industries-name-box d-flex align-items-center justify-content-center"
+            >
+              <div class="industries-name">
+                <h5 class="">UTILITIES</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="industries-name-box d-flex align-items-center justify-content-center"
+            >
+              <div class="industries-name">
+                <h5 class="text-center">PUMB <br /> MANUFACTURING</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="customer-feedback-section">
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-center">
+          <div class="feedback-left">
+            <div class="feedback-title">
+              <h2>WHAT OUR CUSTOMER SAYS</h2>
+              <p>At Micron Electric, our customers are at the heart of
+                everything we do. Their trust drives us to deliver the highest
+                quality in LV switchgear and electrical components. Here’s what
+                a few of them had to say:</p>
+            </div>
+            <div class="feedback-btn">
+              <button>See more</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 feedback-section">
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+              <div class="client-wrapper-right">
+                <div class="client-wrapper d-flex align-items-center">
+                  <div class="client-img">
+                    <img src="images/image (4).png" alt="" />
+                  </div>
+                  <div class="client-details">
+                    <div class="client-name">
+                      <h5>Ms. Fatima Al Suwaidi</h5>
+                    </div>
+                    <div class="client-feedback">
+                      <p>Exceptional quality and consistent delivery — Micron
+                        <br />
+                        has helped streamline our procurement for electrical
+                        components. A name we trust.</p>
+                    </div>
+                  </div>
+                  <div class="comma-svg">
+                    <img src="images/image 35.svg" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-start">
+              <div class="client-wrapper-left">
+                <div class="client-wrapper d-flex align-items-center">
+                  <div class="client-img">
+                    <img src="images/image (4).png" alt="" />
+                  </div>
+                  <div class="client-details">
+                    <div class="client-name">
+                      <h5>Mr. Rakesh Menon</h5>
+                    </div>
+                    <div class="client-feedback">
+                      <p>Micron Electric has been our go-to partner for
+                        <br />
+                        switchgear solutions. Their products are reliable, and
+                        <br />
+                        the support team is always responsive and professional.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="comma-svg">
+                    <img src="images/image 37.svg" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+              <div class="client-wrapper-right">
+                <div class="client-wrapper d-flex align-items-center">
+                  <div class="client-img">
+                    <img src="images/image (4).png" alt="" />
+                  </div>
+                  <div class="client-details">
+                    <div class="client-name">
+                      <h5>Eng. Joseph Mathew</h5>
+                    </div>
+                    <div class="client-feedback">
+                      <p>The performance of Micron's control devices has
+                        <br />exceeded our expectations. Their innovation and
+                        <br />
+                        attention to safety is impressive.</p>
+                    </div>
+                  </div>
+                  <div class="comma-svg">
+                    <img src="images/image 35.svg" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="contact-title mb-4">
+      <h3>CONNECT WITH US</h3>
+    </div>
+    <div class="home-contact-section">
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <div class="contact-img text-center">
+            <img src="images/image (5).png" alt="Contact Us" />
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="contact-form-wrapper">
+            <form id="contactForm">
+              <!-- Row 1: First and Last Name -->
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <input type="text" class="form-control" id="firstName" placeholder="First Name" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <input type="text" class="form-control" id="lastName" placeholder="Last Name" required />
+                </div>
+              </div>
+
+              <!-- Row 2: Email and Phone Number -->
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <input type="email" class="form-control" id="email" placeholder="Email" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <input type="tel" class="form-control" id="phone" placeholder="Phone No" required />
+                </div>
+              </div>
+
+              <!-- Row 3: Message -->
+              <div class="mb-3">
+                <textarea class="form-control" id="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+                <button type="submit" class="main-submit-btn" onclick="searchSingleProduct()">Submit</button>
+
+              <!-- Submit Button -->
+              <div class="text-center p-0">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container-fluid px-0">
+    <div class="footer-container">
+      <div class="logo-div">
+        <img src="images/Group 80.svg" alt="">
+      </div>
+      <div class="row">
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="quick-link-section text-white">
+          <div class="quick-link-title">
+            <h5>QUICK LINKS</h5>
+          </div>
+          <div class="quick-links">
+            <ul>
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Products</li>
+              <li>Downloads</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="address-section text-white">
+            <div class="address-title">
+              <h5>ADDRESS</h5>
+            </div>
+            <div class="address-list">
+              <ul><li class="address-1 d-flex">
+                <img src="images/image 55 (1).svg" alt="">
+                <h6>MICRON ELECTRIC LTD 20-22 <br> Wenlock Road MICRON ELECTRIC <br> LTD London N1 7GU</h6>
+              </li>
+              <li class="address-1 d-flex">
+                <img src="images/image 56.svg" alt="">
+               <div>
+                 <p class="mb-0">9807 654 345</p> 
+                <p>9807 654 345</p>
+               </div>
+              </li>
+              <li class="address-1 d-flex">
+                <img src="images/image 57.svg" alt="">
+                <h6>micronelecrical@gmail.com</h6>
+              </li>
+              </ul>
+            </div>
+           
+          </div>
+        </div>
+       <div class="d-flex justify-content-center">
+          <hr class="text-white" style="width:90%;">
+       </div>
+       <div class="terms-conditions text-white d-flex justify-content-center">
+        <p>©️ 2024 All Rights Reserved. Developed by canyon Technologies</p>
+       </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const products = {{{productsJSON}}}; // Injected JSON from backend
+  const searchInput = document.getElementById('searchInput');
+  const categorySelect = document.getElementById('categorySelect');
+  const suggestionsList = document.getElementById('suggestionsList');
+  const searchForm = document.getElementById('searchForm');
+
+  // Show suggestions as user types
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    const selectedCategory = categorySelect.value;
+    suggestionsList.innerHTML = '';
+
+    if (!query) {
+      suggestionsList.style.display = 'none';
+      return;
+    }
+
+    const matches = products.filter(p => {
+      const matchQuery = p.p_name.toLowerCase().includes(query) || p.p_code.toLowerCase().includes(query);
+      const matchCategory = !selectedCategory || p.p_category === selectedCategory;
+      return matchQuery && matchCategory;
+    });
+
+    if (matches.length === 0) {
+      suggestionsList.style.display = 'none';
+      return;
+    }
+
+    matches.slice(0, 5).forEach(p => {
+      const li = document.createElement('li');
+      li.textContent = `${p.p_name} (${p.p_code})`;
+      li.classList.add('list-group-item', 'list-group-item-action');
+      li.addEventListener('click', () => {
+        searchInput.value = p.p_name;
+        suggestionsList.innerHTML = '';
+        suggestionsList.style.display = 'none';
+      });
+      suggestionsList.appendChild(li);
+    });
+
+    suggestionsList.style.display = 'block';
+  });
+
+  // Only make API call when search button is clicked
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const query = searchInput.value.trim().toLowerCase();
+    const selectedCategory = categorySelect.value;
+
+    suggestionsList.innerHTML = '';
+
+if (!query) {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Oops...',
+    text: 'Please enter a product name or code',
+  });
+  return;
+}
+
+
+    const match = products.find(p => {
+      const matchQuery = p.p_name.toLowerCase().includes(query) || p.p_code.toLowerCase().includes(query);
+      const matchCategory = !selectedCategory || p.p_category === selectedCategory;
+      return matchQuery && matchCategory;
+    });
+
+    if (!match) {
+      alert('No matching product found');
+      return;
+    }
+
+    // API call
+    window.location.href = `single-product/${match._id}`;
+
+
+
+  });
+});
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const products = {{{productsJSON}}}; // Injected full product array
+  const tagItems = document.querySelectorAll('#tagFilter li');
+  const productContainer = document.getElementById('productContainer');
+
+  const getVisibleCount = () => {
+    const width = window.innerWidth;
+    if (width >= 1400) return 4;
+    if (width >= 1200) return 4;
+    if (width >= 992) return 4;
+    if (width >= 678) return 3;
+    return 2; // default
+  };
+
+  // Truncate feature points
+  const truncateFeaturePoints = () => {
+    document.querySelectorAll('.product-ul').forEach(ul => {
+      const items = ul.querySelectorAll('li');
+      items.forEach((li, index) => {
+        if (index >= 3) {
+          li.style.display = 'none'; // Hide all items after the 3rd one
+        } else {
+          const originalText = li.textContent.trim();
+          li.textContent = originalText.length > 25 ? originalText.slice(0, 25) + '…' : originalText;
+        }
+      });
+    });
+  };
+
+  // Render filtered products
+  const renderProducts = (filteredProducts) => {
+  productContainer.innerHTML = ''; // Clear old products
+  const limit = getVisibleCount();
+  const slicedProducts = filteredProducts.slice(0, limit);
+
+  if (slicedProducts.length === 0) {
+    productContainer.innerHTML = '<p>No products found.</p>';
+    return;
+  }
+
+  slicedProducts.forEach(product => {
+    const fullDescription = product.p_description || '';
+
+    // Limit to first 20 words
+    const words = fullDescription.split(/\s+/); // split by spaces
+    const shortDescription = words.slice(0, 14).join(' ') + (words.length > 14 ? '...' : '');
+
+    const productHTML = `
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+        <div class="discover-product-box">
+          <div class="product-img-tag">
+            <img src="${product.product_image_url}" alt="${product.p_name}" />
+          </div>
+          <div class="tag-card-title">
+            <h5 class="product-description-title">${product.p_name}</h5>
+          </div>
+          <div class="product-description">
+            <p class="product-description-text">${shortDescription}</p>
+          </div>
+          <div class="tag-product-btn">
+            <button onclick="viewSingleProduct('${product._id}')">
+              Details <img src="images/Arrow 5.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    productContainer.innerHTML += productHTML;
+  });
+};
+
+
+
+  // Handle tag click
+  tagItems.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const selectedTag = tag.getAttribute('data-tag');
+
+      tagItems.forEach(t => t.classList.remove('active-tag'));
+      tag.classList.add('active-tag');
+
+      const filtered = products.filter(p => p.product_tag === selectedTag);
+      renderProducts(filtered);
+    });
+  });
+
+  // Re-render on resize
+  window.addEventListener('resize', () => {
+    const activeTag = document.querySelector('#tagFilter .active-tag')?.getAttribute('data-tag');
+    if (activeTag) {
+      const filtered = products.filter(p => p.product_tag === activeTag);
+      renderProducts(filtered);
+    }
+  });
+
+  // Auto-click first tag
+  if (tagItems.length > 0) tagItems[0].click();
+});
+
+ function viewSingleProduct(productId) {
+    // Example: Navigate to a product detail page
+    window.location.href = `/single-product/${productId}`;
+
+    // Or fetch product details dynamically:
+    // fetch(`/api/product/${productId}`)
+    //   .then(response => response.json())
+    //   .then(data => console.log(data));
+  }
+
+</script>
+
+
+
+
+<script>document.addEventListener("DOMContentLoaded", () => {
+  const heroTexts = [
+    "Front handle provides direct manual operation.",
+    "Front handle provides direct manual operation.",
+    "Remote or local control is selectable by Auto.",
+    "Contact status is visible through position of front.",
+    "Low power consumption for energy saving."
+  ];
+
+  let currentIndex = 0;
+  const target = document.querySelector(".quote-animated-text");
+
+  function animateHeroText(text) {
+    target.innerHTML = "";
+    text.split("").forEach((char, index) => {
+      const span = document.createElement("span");
+      span.textContent = char === " " ? "\u00A0" : char;
+      target.appendChild(span);
+
+      setTimeout(() => {
+        span.classList.add("show");
+      }, index * 50);
+    });
+  }
+
+  animateHeroText(heroTexts[currentIndex]);
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % heroTexts.length;
+    animateHeroText(heroTexts[currentIndex]);
+  },3500);
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const carousel = document.getElementById("carousel");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  const items = document.querySelectorAll(".box");
+
+  if (window.innerWidth < 576) {
+    // ========== 📱 MOBILE = Centered Scroll ==========
+    let currentIndex = 0;
+
+    function updateMobileCarousel() {
+      const boxWidth = items[0].offsetWidth + 10;
+      const containerWidth = carousel.parentElement.offsetWidth;
+      const offset = (containerWidth - boxWidth) / 2;
+      carousel.style.transition = "transform 0.4s ease";
+      carousel.style.transform = `translateX(calc(${offset}px - ${currentIndex * boxWidth}px))`;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (currentIndex < items.length - 1) {
+        currentIndex++;
+        updateMobileCarousel();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateMobileCarousel();
+      }
+    });
+
+    window.addEventListener("resize", updateMobileCarousel);
+    updateMobileCarousel();
+
+  } else {
+    // ========== 💻 DESKTOP = Infinite Loop ==========
+    const originalBoxes = Array.from(items);
+    const boxWidth = 310; // fixed value (box + margin)
+    const originalCount = originalBoxes.length;
+    let index = originalCount;
+
+    // Clone to left & right if more than 1 item
+    if (originalCount > 1) {
+      originalBoxes.forEach(box => {
+        const clone = box.cloneNode(true);
+        carousel.appendChild(clone);
+      });
+
+      [...originalBoxes].reverse().forEach(box => {
+        const clone = box.cloneNode(true);
+        carousel.insertBefore(clone, carousel.firstChild);
+      });
+    }
+
+    carousel.style.transform = `translateX(-${index * boxWidth}px)`;
+
+    function updateDesktopCarousel() {
+      carousel.style.transition = "transform 0.4s ease";
+      carousel.style.transform = `translateX(-${index * boxWidth}px)`;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      index++;
+      updateDesktopCarousel();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      index--;
+      updateDesktopCarousel();
+    });
+
+    carousel.addEventListener("transitionend", () => {
+      if (index >= originalCount * 2) {
+        carousel.style.transition = "none";
+        index = originalCount;
+        carousel.style.transform = `translateX(-${index * boxWidth}px)`;
+      } else if (index < originalCount) {
+        carousel.style.transition = "none";
+        index = originalCount + (index % originalCount);
+        carousel.style.transform = `translateX(-${index * boxWidth}px)`;
+      }
+    });
+
+    if (originalCount <= 1) {
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
+    }
+  }
+});
+</script>
+
+<script>
+  const categories = {{{categoriesJSON}}};
+const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+
+document.querySelectorAll('.main-cat').forEach(mainCatElem => {
+  mainCatElem.addEventListener('mouseenter', function () {
+    const mainCategory = this.dataset.category;
+    const category = categories.find(cat => cat.mainCategory === mainCategory);
+    const subMenu = this.nextElementSibling;
+
+    // Clear previous subcategories
+    subMenu.innerHTML = '';
+
+    if (category && Array.isArray(category.subCategories)) {
+      category.subCategories.forEach(sub => {
+        const li = document.createElement('li');
+        
+        // Each subcategory link with data attribute
+        li.innerHTML = `
+          <a class="dropdown-item sub-cat" href="#" data-main-category="${mainCategory}" data-subcategory="${sub}">${sub}</a>
+          <ul class="dropdown-menu product-menu py-0 border-0" style="border: 1px solid #0000001A; display:none;"></ul>
+        `;
+        subMenu.appendChild(li);
+
+        // Add hover event to subcategory link to load products
+        const subCatLink = li.querySelector('.sub-cat');
+        const productMenu = li.querySelector('.product-menu');
+
+        subCatLink.addEventListener('mouseenter', () => {
+          // Clear previous products
+          productMenu.innerHTML = '';
+          productMenu.style.display = 'block';
+
+          // Find products matching mainCategory and subcategory
+          const matchingProducts = products.filter(p => 
+            p.p_category === mainCategory && p.p_subcategory === sub
+          );
+
+          if (matchingProducts.length > 0) {
+            matchingProducts.forEach(product => {
+              const prodLi = document.createElement('li');
+              prodLi.innerHTML = `<a class="dropdown-item" href="/single-product/${product._id}">${product.p_name}</a>`;
+              productMenu.appendChild(prodLi);
+            });
+          } else {
+            productMenu.innerHTML = '<li class="dropdown-item disabled">No products found</li>';
+          }
+        });
+
+        // Optional: hide product submenu when mouse leaves subcategory link or submenu
+        li.addEventListener('mouseleave', () => {
+          productMenu.style.display = 'none';
+        });
+      });
+    }
+  });
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
