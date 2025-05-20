@@ -31,9 +31,17 @@
                 href="/about-us"
               >About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link nav-link-sub" href="/product-page">Products</a>
-            </li>
+                      <li class="nav-item dropdown position-relative">
+  <a class="nav-link nav-link-sub" href="#" id="productDropdown">Products</a>
+ <ul class="dropdown-menu multi-level py-0" id="mainCategoryDropdown" style="border: 1px solid #0000001A">
+  {{#each categories}}
+    <li class="dropdown-submenu sub-submenu">
+      <a class="dropdown-item dropdown-sub main-cat" data-category="{{mainCategory}}" href="#">{{mainCategory}}</a>
+      <ul class="dropdown-menu sub-cat-menu about-sub-cat py-0 border-0" style="border: 1px solid #0000001A"></ul>
+    </li>
+  {{/each}}
+</ul>
+</li>
             <li class="nav-item">
               <a class="nav-link nav-link-sub" href="/downloads">Downloads</a>
             </li>
@@ -240,4 +248,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+</script>
+<script>
+  const categories = {{{categoriesJSON}}};
+const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+
+document.querySelectorAll('.main-cat').forEach(mainCatElem => {
+  mainCatElem.addEventListener('mouseenter', function () {
+    const mainCategory = this.dataset.category;
+    const category = categories.find(cat => cat.mainCategory === mainCategory);
+    const subMenu = this.nextElementSibling;
+
+    // Clear previous subcategories
+    subMenu.innerHTML = '';
+
+    if (category && Array.isArray(category.subCategories)) {
+      category.subCategories.forEach(sub => {
+        const li = document.createElement('li');
+        
+        // Each subcategory link with data attribute
+        li.innerHTML = `
+          <a class="dropdown-item sub-cat" href="#" data-main-category="${mainCategory}" data-subcategory="${sub}">${sub}</a>
+          <ul class="dropdown-menu product-menu py-0 border-0" style="border: 1px solid #0000001A; display:none;"></ul>
+        `;
+        subMenu.appendChild(li);
+
+        // Add hover event to subcategory link to load products
+        const subCatLink = li.querySelector('.sub-cat');
+        const productMenu = li.querySelector('.product-menu');
+
+        subCatLink.addEventListener('mouseenter', () => {
+          // Clear previous products
+          productMenu.innerHTML = '';
+          productMenu.style.display = 'block';
+
+          // Find products matching mainCategory and subcategory
+          const matchingProducts = products.filter(p => 
+            p.p_category === mainCategory && p.p_subcategory === sub
+          );
+
+          if (matchingProducts.length > 0) {
+            matchingProducts.forEach(product => {
+              const prodLi = document.createElement('li');
+              prodLi.innerHTML = `<a class="dropdown-item" href="/single-product/${product._id}">${product.p_name}</a>`;
+              productMenu.appendChild(prodLi);
+            });
+          } else {
+            productMenu.innerHTML = '<li class="dropdown-item disabled">No products found</li>';
+          }
+        });
+
+        // Optional: hide product submenu when mouse leaves subcategory link or submenu
+        li.addEventListener('mouseleave', () => {
+          productMenu.style.display = 'none';
+        });
+      });
+    }
+  });
+});
+
 </script>

@@ -113,7 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function animateCount(el, start, end, duration, showPlus = false) {
   let current = start;
   const range = end - start;
-  const increment = range / (duration / 20); // update every 20ms
+  const stepTime = 30; // slower updates (every 30ms instead of 20ms)
+  const increment = range / (duration / stepTime);
 
   const counter = setInterval(() => {
     current += increment;
@@ -124,19 +125,17 @@ function animateCount(el, start, end, duration, showPlus = false) {
     }
 
     el.textContent = Math.floor(current) + (showPlus ? '+' : '');
-  }, 20);
+  }, stepTime);
 }
 
 const observer = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Count DOWN from 2025 to 2013 (Year)
-      animateCount(document.getElementById("year-count"), 2025, 2013, 1500);
-
-      // Count UP with '+' at the end
-      animateCount(document.getElementById("customer-count"), 0, 10000, 1500, true);
-      animateCount(document.getElementById("project-count"), 0, 5000, 1500, true);
-      animateCount(document.getElementById("country-count"), 0, 10, 1500, true); // <-- Added true here
+      // Slower durations (in milliseconds)
+      animateCount(document.getElementById("year-count"), 2025, 2013, 4000); // slow count down
+      animateCount(document.getElementById("customer-count"), 0, 10000, 6000, true); // slower count up
+      animateCount(document.getElementById("project-count"), 0, 5000, 5000, true);
+      animateCount(document.getElementById("country-count"), 0, 10, 5000, true);
 
       observer.disconnect();
     }
@@ -144,5 +143,6 @@ const observer = new IntersectionObserver((entries, observer) => {
 });
 
 observer.observe(document.querySelector(".company-record"));
+
 
 

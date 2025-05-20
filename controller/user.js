@@ -43,13 +43,15 @@ const userController = {
         console.log(productId)
           // Find product by ID
           const product = await Product.findById(productId);
+          const categories = await Category.find({})
+          const allProduct = await Product.find({})
       
           if (!product) {
             return res.status(404).send('Product not found');
           }
       
           // Render the product page
-          res.render('user/single-product', { product });
+          res.render('user/single-product', { product,categories,productsJSON:JSON.stringify(allProduct),categoriesJSON:JSON.stringify(categories)});
         } catch (err) {
           console.error('Error fetching product:', err);
           res.status(500).send('Server error');
