@@ -79,7 +79,37 @@ getContactPage: async (req, res) => {
     console.error("Error loading contact page:", error);
     res.status(500).send("Server Error");
   }
-}
+},
+
+getCategoryPage: async (req, res) => {
+  try {
+    const mainCategory = req.params.mainCategory;
+
+    // Find the category object to verify it exists (optional)
+    const category = await Category.findOne({ mainCategory });
+
+    if (!category) {
+      return res.status(404).send('Category not found');
+    }
+
+    // Get products only from that main category
+    const products = await Product.find({ p_category: mainCategory });
+
+    // Get all categories for rendering navbar/menu
+    const categories = await Category.find({});
+
+    res.render('user/category', {
+      categories,
+      productsJSON: JSON.stringify(products),
+      selectedCategory: mainCategory,
+    });
+  } catch (error) {
+    console.error('Error fetching category page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+},
+
+
 
 
       

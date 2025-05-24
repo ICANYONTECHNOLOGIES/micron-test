@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <section>
+    <section style="overflow-y: hidden;">
       <div class="category-section">
         <div class="category-tile">
           <h3>CATEGORIES</h3>
@@ -260,7 +260,7 @@
   </div>
 </section>
 
-<section>
+<section style="overflow: hidden;">
   <div class="container">
     <div class="record-container">
       <div class="row">
@@ -331,7 +331,7 @@
 
 </section>
 
-<section>
+<section style="overflow-y: hidden;">
   <div class="container">
     <div class="discover-product-container">
       <div class="discover-section-title">
@@ -365,7 +365,7 @@
 </section>
 
 
-<section>
+<section style="overflow-y: hidden;">
   <div class="right-choice-section">
     <div class="container">
       <div class="row align-items-center">
@@ -467,7 +467,7 @@
 </section>
 
 
-<section>
+<section style="overflow-y: hidden;">
   <div class="industries-section">
     <div class="container">
       <div class="industries-title">
@@ -532,7 +532,7 @@
   </div>
 </section>
 
-<section>
+<section style="overflow-y: hidden;">
   <div class="container">
     <div class="customer-feedback-section">
       <div class="row">
@@ -634,7 +634,7 @@
   </div>
 </section>
 
-<section>
+<section style="overflow-y: hidden;">
   <div class="container">
     <div class="contact-title mb-4">
       <h3>CONNECT WITH US</h3>
@@ -685,7 +685,7 @@
     </div>
   </div>
 </section>
-<footer>
+<footer style="overflow-y: hidden;">
   <div class="container-fluid px-0">
     <div class="footer-container">
       <div class="logo-div">
@@ -876,16 +876,22 @@ if (!query) {
 
     // Limit to first 20 words
     const words = fullDescription.split(/\s+/); // split by spaces
-    const shortDescription = words.slice(0, 14).join(' ') + (words.length > 14 ? '...' : '');
+    const shortDescription = words.slice(0, 18).join(' ') + (words.length > 18 ? '...' : '');
 
     const productHTML = `
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div class="discover-product-box">
           <div class="product-img-tag">
             <img src="${product.product_image_url}" alt="${product.p_name}" />
+                 <div class="product-badge">${product.product_tag || 'New'}</div>
+                                              <div class="product-category text-start mb-0" style="padding-left:20px;padding-top:10px">${product.p_subcategory}</div>
+
+
           </div>
           <div class="tag-card-title">
-            <h5 class="product-description-title">${product.p_name}</h5>
+               <h5 class="productCat-name">${product.p_name}</h5>
+                             <p class="product-catCode text-start mb-2" style="padding-left:20px;">${product.p_code}</p>
+
           </div>
           <div class="product-description">
             <p class="product-description-text">${shortDescription}</p>

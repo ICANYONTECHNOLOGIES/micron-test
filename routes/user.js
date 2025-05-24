@@ -9,7 +9,8 @@ router.get('/about-us',userController.getAboutPage);
 router.get('/downloads',userController.getDownloadPage);
 router.get('/product-page',userController.getAllProduct);
 router.get('/single-product/:id',userController.getSingleProduct);
-router.get('/contact-us',userController.getContactPage)
+router.get('/contact-us',userController.getContactPage);
+router.get('/category/:mainCategory', userController.getCategoryPage);
 
 
 

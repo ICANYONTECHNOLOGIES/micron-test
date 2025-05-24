@@ -33,7 +33,7 @@
  <ul class="dropdown-menu multi-level py-0" id="mainCategoryDropdown" style="border: 1px solid #0000001A">
   {{#each categories}}
     <li class="dropdown-submenu">
-      <a class="dropdown-item main-cat" data-category="{{mainCategory}}" href="#">{{mainCategory}}</a>
+      <a class="dropdown-item main-cat"  data-category="{{mainCategory}}" href="#">{{mainCategory}}</a>
       <ul class="dropdown-menu sub-cat-menu py-0 border-0" style="border: 1px solid #0000001A"></ul>
     </li>
   {{/each}}
@@ -76,13 +76,13 @@
 
 </header>
 
-<section>
+<section style="overflow-x: hidden;">
   <div class="container-fluid px-0">
     <div class="category-downloads">
      <div class="d-flex">
        <h3 class="mb-4">CATEGORIES</h3>
         <div class="catelog-btn">
-          <button>Download Catalogues</button>
+          <button>Download Catalogue</button>
          </div>
      </div>
       <div class="row">
@@ -279,19 +279,19 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const products = {{{productsJSON}}}; // JSON injected from the backend
   const productRow = document.getElementById('productRow');
-  
+
   // Automatically show the subcategories for the first main category
   const firstMainItem = document.querySelector('.main-category-item');
   if (firstMainItem) {
     const firstSubList = firstMainItem.querySelector('.subcategory-list');
     if (firstSubList) {
-      firstSubList.classList.remove('d-none'); // Show the subcategories of the first main category
+      firstSubList.classList.remove('d-none'); // Show subcategories of first main category
     }
 
-    // Automatically trigger the click on the first subcategory to load products
+    // Automatically trigger click on first subcategory to load products
     const firstSubLink = firstSubList.querySelector('.subcategory-link');
     if (firstSubLink) {
-      firstSubLink.click(); // Simulate a click on the first subcategory link to show products
+      firstSubLink.click();
     }
   }
 
@@ -304,83 +304,97 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // On subcategory click: show products in the row and mark the active subcategory
-document.querySelectorAll('.subcategory-link').forEach(link => {
-  link.addEventListener('click', () => {
-    const subcategory = link.getAttribute('data-subcategory');
-    const mainCategory = link.getAttribute('data-parent-main');
+  // On subcategory click: show products, mark active, and scroll on mobile
+  document.querySelectorAll('.subcategory-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const subcategory = link.getAttribute('data-subcategory');
+      const mainCategory = link.getAttribute('data-parent-main');
 
-    const filteredProducts = products.filter(p =>
-      p.p_subcategory === subcategory && p.p_category === mainCategory
-    );
+      const filteredProducts = products.filter(p =>
+        p.p_subcategory === subcategory && p.p_category === mainCategory
+      );
 
-    // Remove 'active' class from all subcategory links
-    document.querySelectorAll('.subcategory-link').forEach(l => {
-      l.classList.remove('active');
+      // Remove 'active' class from all subcategory links
+      document.querySelectorAll('.subcategory-link').forEach(l => {
+        l.classList.remove('active');
+      });
+
+      // Add 'active' class to clicked subcategory
+      link.classList.add('active');
+
+      renderProducts(filteredProducts);
+
+  if (window.innerWidth <= 768) {
+  const topOffset = productRow.getBoundingClientRect().top + window.pageYOffset - 100;
+  window.scrollTo({ top: topOffset, behavior: 'smooth' });
+}
+
     });
-
-    // Add 'active' class to the clicked subcategory
-    link.classList.add('active');
-
-    renderProducts(filteredProducts);
   });
+
+  // Render filtered products function
+  function renderProducts(filteredProducts) {
+    productRow.innerHTML = '';
+
+    if (filteredProducts.length === 0) {
+      productRow.innerHTML = '<p class="text-muted">No products found for this subcategory.</p>';
+      return;
+    }
+
+    filteredProducts.forEach(p => {
+      const col = document.createElement('div');
+      col.className = 'col-md-4 col-lg-4 col-xl-3 mb-4 d-flex justify-content-center';
+
+      const box = document.createElement('div');
+      box.className = 'product-box p-0 position-relative';
+
+      let description = '';
+      if (p.p_description) {
+        const words = p.p_description.split(/\s+/);
+        description = words.slice(0,16).join(' ') + (words.length > 16 ? '…' : '');
+      }
+
+box.innerHTML = `
+  <div class="product-box-inner" style="cursor: pointer;">
+    <img src="${p.product_image_url}" class="productCat-img" alt="${p.p_name}"  />
+     <div class="product-badge">${p.product_tag || 'New'}</div>
+                             <div class="product-category text-start mb-0" style="padding-left:20px;padding-top:10px">${p.p_subcategory}</div>
+
+    <h5 class="productCat-name">${p.p_name}</h5>
+                             <p class="product-catCode text-start mb-2" style="padding-left:20px;">${p.p_code}</p>
+
+    <p class="productCat-desc">${description}</p>
+    <button class="product-download">
+      <a href="${p.product_pdf_url}" download class="btn mt-2 d-block product-download" style="color:white">
+        Download
+      </a>
+    </button>
+  </div>
+`;
+
+box.querySelector('.product-box-inner').addEventListener('click', (e) => {
+  // Prevent redirect when clicking the download button
+  if (!e.target.closest('a')) {
+    window.location.href = `/single-product/${p._id}`;
+  }
 });
 
 
-  // Render filtered products
-function renderProducts(filteredProducts) {
-  productRow.innerHTML = '';
-
-  if (filteredProducts.length === 0) {
-    productRow.innerHTML = '<p class="text-muted">No products found for this subcategory.</p>';
-    return;
+      col.appendChild(box);
+      productRow.appendChild(col);
+    });
   }
 
-  filteredProducts.forEach(p => {
-    const col = document.createElement('div');
-    col.className = 'col-md-4 col-lg-4 col-xl-3 mb-4 d-flex justify-content-center';
-
-    const box = document.createElement('div');
-    box.className = 'product-box p-0 position-relative';
-
-    // Trim description to 20 words
-    let description = '';
-    if (p.p_description) {
-      const words = p.p_description.split(/\s+/);
-      description = words.slice(0, 14).join(' ') + (words.length > 14 ? '…' : '');
-    }
-
-    box.innerHTML = `
-      <img src="${p.product_image_url}" alt="${p.p_name}" style="width: 100%;
-        max-width: 260px;
-        height:205px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;" />
-      <h5 class="productCat-name">${p.p_name}</h5>
-      <p class="productCat-desc">${description}</p>
-      <button class="product-download">
-        <a href="${p.product_pdf_url}" download class="btn mt-2 d-block product-download" style="color:white">
-        Download
-      </a>
-      </button>
-    `;
-
-    col.appendChild(box);
-    productRow.appendChild(col);
-  });
-}
-
-
-
-  // Trigger click on the first subcategory after a slight delay to ensure DOM elements are loaded
+  // Trigger click on first subcategory after a delay to ensure DOM is ready
   setTimeout(() => {
     const firstSubLink = document.querySelector('.subcategory-link');
     if (firstSubLink) {
-      firstSubLink.click(); // Trigger click to load products
+      firstSubLink.click();
     }
   }, 200);
 });
 </script>
+
 <script>
   const categories = {{{categoriesJSON}}};
 const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products

@@ -1,0 +1,445 @@
+
+    <style>
+    
+
+    
+
+
+  
+
+
+    </style>
+
+      <header style="overflow:visible;">
+  <div class="container-fluid px-0">
+    <nav class="navbar navbar-user navbar-expand-lg navbar-light navbar-sub">
+      <div class="container-fluid px-0">
+        <div class="compay-logo">
+          <a class="navbar-brand d-flex align-items-end" href="/">
+            <img src="/images/micron-logo.svg" class="img-fluid" alt="" />
+            <h1 class="compay-name">MICRON ELECTRIC</h1>
+          </a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-sub"
+                aria-current="page"
+                href="/about-us"
+              >About Us</a>
+            </li>
+<li class="nav-item dropdown position-relative">
+  <a class="nav-link nav-link-sub" href="#" id="productDropdown">Products</a>
+ <ul class="dropdown-menu multi-level py-0" id="mainCategoryDropdown" style="border: 1px solid #0000001A">
+  {{#each categories}}
+    <li class="dropdown-submenu">
+      <a class="dropdown-item main-cat" data-category="{{mainCategory}}" href="/category/{{mainCategory}}">{{mainCategory}}</a>
+      <ul class="dropdown-menu sub-cat-menu py-0 border-0" style="border: 1px solid #0000001A"></ul>
+    </li>
+  {{/each}}
+</ul>
+</li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub" href="/downloads">Downloads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-sub contact-active" href="/contact-us">Contact Us</a>
+            </li>
+           <a href="/contact-us">
+            <div class="nav-btn">
+              <button>GET A QUOTE</button>
+            </div>
+           </a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+</header>
+                    <span class="d-none" id="current-category">Loading...</span>
+
+    <div class="container-fluid" style="padding-left: 60px !important; padding-right: 60px;" >
+        <div class="category-header">
+            <h2 class="category-title mt-4" id="category-title">Loading...</h2>
+            <p class="category-description" id="category-description">
+                Loading product information...
+            </p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-section">
+                <div class="filter-title">Filter by Subcategory:</div>
+                <div class="subcategory-filters" id="subcategory-filters">
+                    <button class="subcategory-btn active" onclick="filterBySubcategory('all')">All Products</button>
+                    <!-- Subcategory buttons will be dynamically loaded -->
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="sort-filter">
+                    <span class="filter-title">Sort by:</span>
+                    <select class="sort-select" id="sort-select" onchange="sortProducts()">
+                        <option value="name">Name (A-Z)</option>
+                        <option value="price-low">Product Code (A-Z)</option>
+                        <option value="price-high">Product Code (Z-A)</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-count" id="results-count">
+            Showing 12 of 24 products
+        </div>
+
+        <div class="products-grid" id="products-grid">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+
+        <div class="pagination" id="pagination">
+            <button onclick="changePage(1)">← Previous</button>
+            <button class="active" onclick="changePage(1)">1</button>
+            <button onclick="changePage(2)">2</button>
+            <button onclick="changePage(3)">3</button>
+            <button onclick="changePage(2)">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        // Products data from backend - replace {{{productsJSON}}} with actual data from your backend
+        const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+        
+        // Global variables
+        let allProducts = [];
+        let currentCategory = '';
+        let currentSubcategory = 'all';
+        let currentSort = 'name';
+        let currentPage = 1;
+        const productsPerPage = 8;
+        
+        // Process products data on page load
+        function processProductsData() {
+            // Convert products array to the format we need
+            allProducts = Array.isArray(products) ? products : Object.values(products).flat();
+            
+            // Get current category from URL or set default
+            const urlParams = new URLSearchParams(window.location.search);
+            currentCategory = urlParams.get('category') || getFirstCategory();
+            
+            // Update page title and category info
+            updateCategoryInfo();
+            
+            // Generate subcategory filters for current category
+            updateSubcategoryFilters();
+        }
+        
+        // Get first available category if none specified
+        function getFirstCategory() {
+            if (allProducts.length > 0) {
+                return allProducts[0].p_category;
+            }
+            return 'All Products';
+        }
+        
+        // Update category information in the UI
+        function updateCategoryInfo() {
+            const categoryTitle = document.getElementById('category-title');
+            const currentCategorySpan = document.getElementById('current-category');
+            const categoryDescription = document.getElementById('category-description');
+            
+            categoryTitle.textContent = currentCategory;
+            currentCategorySpan.textContent = currentCategory;
+            
+            // Update description based on category
+            const categoryProducts = getCurrentCategoryProducts();
+            const productCount = categoryProducts.length;
+            categoryDescription.textContent = `Explore our ${currentCategory.toLowerCase()} collection with ${productCount} products available.`;
+        }
+
+        // Get products for current category
+        function getCurrentCategoryProducts() {
+            return allProducts.filter(product => product.p_category === currentCategory);
+        }
+        
+        // Get products filtered by subcategory
+        function getFilteredProducts() {
+            let categoryProducts = getCurrentCategoryProducts();
+            
+            // Filter by subcategory if not 'all'
+            if (currentSubcategory !== 'all') {
+                categoryProducts = categoryProducts.filter(product => 
+                    product.p_subcategory === currentSubcategory
+                );
+            }
+            
+            return categoryProducts;
+        }
+
+        // Initialize the page
+        function initializePage() {
+            processProductsData();
+            loadProducts();
+        }
+
+        // Load and display products
+        function loadProducts() {
+            let filteredProducts = getFilteredProducts();
+            
+            // Sort products
+            filteredProducts = sortProductsArray(filteredProducts, currentSort);
+            
+            // Update results count
+            updateResultsCount(filteredProducts.length);
+            
+            // Display products for current page
+            displayProducts(filteredProducts);
+            
+            // Update pagination
+            updatePagination(filteredProducts.length);
+        }
+
+        // Display products on the page
+        function displayProducts(productsList) {
+            const grid = document.getElementById('products-grid');
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const pageProducts = productsList.slice(startIndex, endIndex);
+            
+            grid.innerHTML = pageProducts.map(product => `
+                <div class="product-card" onclick="viewProduct('${product._id}')">
+                      <div class="product-image">
+                           <img src="${product.product_image_url}" alt="" />
+
+
+                        <div class="product-badge">${product.product_tag || 'New'}</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.p_subcategory}</div>
+                        <h3 class="product-title">${product.p_name}</h3>
+                         <span class="current-price">${product.p_code}</span>
+                        <p class="product-description">${truncateText(product.p_description, 120)}</p>
+                        <button class="add-to-cart" onclick="viewProductDetails('${product._id}', event)">Details
+                    <img src="/images/Arrow 5.svg" alt="" /></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Truncate text for display
+        function truncateText(text, maxLength) {
+            if (!text) return '';
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        // Update subcategory filters based on current category
+        function updateSubcategoryFilters() {
+            const categoryProducts = getCurrentCategoryProducts();
+            const subcategories = [...new Set(categoryProducts.map(p => p.p_subcategory))].filter(Boolean);
+            const filtersContainer = document.getElementById('subcategory-filters');
+            
+            let filtersHTML = '<button class="subcategory-btn active" onclick="filterBySubcategory(\'all\')">All Products</button>';
+            subcategories.forEach(sub => {
+                filtersHTML += `<button class="subcategory-btn" onclick="filterBySubcategory('${sub}')">${sub}</button>`;
+            });
+            
+            filtersContainer.innerHTML = filtersHTML;
+        }
+
+        // Filter by subcategory
+        function filterBySubcategory(subcategory) {
+            currentSubcategory = subcategory;
+            currentPage = 1;
+            
+            // Update active button
+            document.querySelectorAll('.subcategory-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            loadProducts();
+        }
+
+        // Sort products
+        function sortProducts() {
+            const sortSelect = document.getElementById('sort-select');
+            currentSort = sortSelect.value;
+            currentPage = 1;
+            loadProducts();
+        }
+
+        // Sort products array
+        function sortProductsArray(productsList, sortBy) {
+            const sorted = [...productsList];
+            
+            switch(sortBy) {
+                case 'name':
+                    return sorted.sort((a, b) => (a.p_name || '').localeCompare(b.p_name || ''));
+                case 'price-low':
+                    // Since your products don't have price, sort by product code
+                    return sorted.sort((a, b) => (a.p_code || '').localeCompare(b.p_code || ''));
+                case 'price-high':
+                    // Since your products don't have price, sort by product code (reverse)
+                    return sorted.sort((a, b) => (b.p_code || '').localeCompare(a.p_code || ''));
+                case 'newest':
+                    return sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                default:
+                    return sorted;
+            }
+        }
+
+        // Update results count
+        function updateResultsCount(totalProducts) {
+            const startItem = (currentPage - 1) * productsPerPage + 1;
+            const endItem = Math.min(currentPage * productsPerPage, totalProducts);
+            document.getElementById('results-count').textContent = 
+                `Showing ${startItem}-${endItem} of ${totalProducts} products`;
+        }
+
+        // Update pagination
+        function updatePagination(totalProducts) {
+            const totalPages = Math.ceil(totalProducts / productsPerPage);
+            const pagination = document.getElementById('pagination');
+            
+            let paginationHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                paginationHTML += `<button onclick="changePage(${currentPage - 1})">← Previous</button>`;
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<button class="active" onclick="changePage(${i})">${i}</button>`;
+                } else {
+                    paginationHTML += `<button onclick="changePage(${i})">${i}</button>`;
+                }
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                paginationHTML += `<button onclick="changePage(${currentPage + 1})">Next →</button>`;
+            }
+            
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            loadProducts();
+        }
+
+        // View product details function
+        function viewProductDetails(productId, event) {
+            if (event) event.stopPropagation();
+            // Navigate to product detail page
+            window.location.href = `/single-product/${productId}`;
+        }
+
+        // View product function
+        function viewProduct(productId) {
+            // Navigate to product detail page
+            window.location.href = `/single-product/${productId}`;
+        }
+
+        // Go home function
+        function goHome() {
+            window.location.href = '/';
+        }
+
+        // Change category function (can be called from navigation)
+        function changeCategory(categoryName) {
+            // Update URL with category parameter
+            const url = new URL(window.location);
+            url.searchParams.set('category', categoryName);
+            window.history.pushState({}, '', url);
+            
+            // Update current category and reset filters
+            currentCategory = categoryName;
+            currentSubcategory = 'all';
+            currentPage = 1;
+            
+            // Update UI and reload products
+            updateCategoryInfo();
+            updateSubcategoryFilters();
+            loadProducts();
+        }
+
+        // Function to get all unique categories (for navigation menu)
+        function getAllCategories() {
+            return [...new Set(allProducts.map(p => p.p_category))].filter(Boolean);
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+    <script>
+  const categories = {{{categoriesJSON}}};
+const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+document.querySelectorAll('.main-cat').forEach(mainCatElem => {
+  mainCatElem.addEventListener('mouseenter', function () {
+    const mainCategory = this.dataset.category;
+    const category = categories.find(cat => cat.mainCategory === mainCategory);
+    const subMenu = this.nextElementSibling;
+
+    // Clear previous subcategories
+    subMenu.innerHTML = '';
+
+    if (category && Array.isArray(category.subCategories)) {
+      category.subCategories.forEach(sub => {
+        const li = document.createElement('li');
+        
+        // Each subcategory link with data attribute
+        li.innerHTML = `
+          <a class="dropdown-item sub-cat" href="#" data-main-category="${mainCategory}" data-subcategory="${sub}">${sub}</a>
+          <ul class="dropdown-menu product-menu py-0 border-0" style="border: 1px solid #0000001A; display:none;"></ul>
+        `;
+        subMenu.appendChild(li);
+
+        // Add hover event to subcategory link to load products
+        const subCatLink = li.querySelector('.sub-cat');
+        const productMenu = li.querySelector('.product-menu');
+
+        subCatLink.addEventListener('mouseenter', () => {
+          // Clear previous products
+          productMenu.innerHTML = '';
+          productMenu.style.display = 'block';
+
+          // Find products matching mainCategory and subcategory
+          const matchingProducts = products.filter(p => 
+            p.p_category === mainCategory && p.p_subcategory === sub
+          );
+
+          if (matchingProducts.length > 0) {
+            matchingProducts.forEach(product => {
+              const prodLi = document.createElement('li');
+              prodLi.innerHTML = `<a class="dropdown-item" href="/single-product/${product._id}">${product.p_name}</a>`;
+              productMenu.appendChild(prodLi);
+            });
+          } else {
+            productMenu.innerHTML = '<li class="dropdown-item disabled">No products found</li>';
+          }
+        });
+
+        // Optional: hide product submenu when mouse leaves subcategory link or submenu
+        li.addEventListener('mouseleave', () => {
+          productMenu.style.display = 'none';
+        });
+      });
+    }
+  });
+});
+
+</script>
