@@ -116,7 +116,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width:100vw;
   height: 100%;
   background-size: cover;
   background-position: center;
@@ -165,14 +165,9 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  margin-top: 26px;
-  text-align: center;
+  margin-top:15px;
 }
 .carousel-img {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Vertically centers everything */
   height: 100%; /* Ensure it fills the parent box */
   text-align: center;
 }
@@ -181,6 +176,7 @@ body {
 .carousel-img img {
   width: 270px !important;
   height: 227px !important;
+  border-radius: 5PX;
 }
 
 .carousel-number ul li.active::before {
@@ -2081,4 +2077,9 @@ margin-top: 30px;
             .subcategory-filters {
                 justify-content: center;
             }
+        }
+
+
+        .contact-form-wrapper-single{
+          margin-top: 80px;
         }

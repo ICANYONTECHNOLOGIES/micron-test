@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     preloadImg.onload = () => {
         const timeElapsed = Date.now() - loaderStart;
-        const remainingTime = Math.max(0, 2000 - timeElapsed); // 5 sec minimum
+        const remainingTime = Math.max(0, 500 - timeElapsed); // 5 sec minimum
 
         setTimeout(() => {
             // Set first image and prepare carousel

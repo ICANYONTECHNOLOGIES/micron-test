@@ -6,7 +6,7 @@ const userController = {
     userHomeGet: async (req, res) => {
         try {
           const products=await Product.find({})
-          const categories = await Category.find().lean();
+    const categories = await Category.find({});  // or .lean() if using Handlebars
           const tags = await Tag.find()
           res.render("user/index", { categories,productsJSON: JSON.stringify(products),tags,categoriesJSON:JSON.stringify(categories) }); // ✅ This is correct
         } catch (err) {
