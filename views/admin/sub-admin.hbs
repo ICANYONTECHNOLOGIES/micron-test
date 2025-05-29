@@ -41,6 +41,11 @@
               <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sub-Admin</span>
             </a>
 					</li>
+           <li class="sidebar-item">
+						<a class="sidebar-link" href="/admin/user-query">
+              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">User Query</span>
+            </a>
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -165,8 +170,8 @@
 
                     <!-- Close (X) button -->
                     <button
-                      class="position-absolute"
-                      style="
+  class="position-absolute"
+  style="
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -181,10 +186,11 @@
     justify-content: center;
     cursor: pointer;
   "
-                      onclick="event.stopPropagation(); deleteTag('{{_id}}', '{{productTag}}')"
-                    >
-                      ❌
-                    </button>
+  onclick="event.stopPropagation(); removeSubAdmin('{{_id}}')"
+>
+  ❌
+</button>
+
 
                   </div>
                 {{/each}}
@@ -340,13 +346,13 @@
   }
 
   // Retrieve admin name from cookies
-  const adminName = getCookie("adminName");
+const adminName = decodeURIComponent(getCookie("adminName") || "");
 
   console.log("adminName:", adminName);  // Log adminName to verify
 
   // Set the admin name to the span with id "adminName" (if exists)
   if (adminName) {
-    document.getElementById('adminName').textContent = adminName;
+document.getElementById('adminName').textContent = decodeURIComponent(adminName);
   } else {
     console.error("Admin Name not found in cookies.");
   }
@@ -439,20 +445,22 @@ form.addEventListener("submit", async function (e) {
 
       const result = await response.json();
 
-      if (response.ok) {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Sub admin added successfully!",
-        });
-        window.location.reload()
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: result.message || "Failed to add sub admin.",
-        });
-      }
+if (response.ok) {
+  Swal.fire({
+    icon: "success",
+    title: "Success",
+    text: "Sub admin added successfully!",
+  }).then(() => {
+    window.location.reload(); // ← reload after alert is closed
+  });
+} else {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: result.message || "Failed to add sub admin.",
+  });
+}
+
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -529,7 +537,9 @@ form.addEventListener("submit", async function (e) {
             icon: "success",
             title: "Updated",
             text: "Sub Admin updated successfully!",
-          });
+          }).then(() => {
+    window.location.reload(); // ← reload after alert is closed
+  });
 
           // Close modal
           const modal = bootstrap.Modal.getInstance(document.getElementById('editSubAdminModal'));
@@ -630,6 +640,52 @@ form.addEventListener("submit", async function (e) {
     }, 2000); // Delay 2 seconds
   });
 </script>
+<script>
+  async function removeSubAdmin(id) {
+    const confirmDelete = await Swal.fire({
+      icon: "warning",
+      title: "Are you sure?",
+      text: "Do you want to delete this sub admin?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (confirmDelete.isConfirmed) {
+      try {
+        const response = await fetch(`/admin/delete-sub-admin/${id}`, {
+          method: "DELETE",
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: result.message || "Sub admin deleted successfully.",
+          }).then(() => {
+            // Reload the page to reflect changes
+            window.location.reload();
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Failed",
+            text: result.message || "Could not delete sub admin.",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Something went wrong. Please try again later.",
+        });
+      }
+    }
+  }
+</script>
+
 
 
 

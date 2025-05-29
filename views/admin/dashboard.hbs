@@ -41,6 +41,11 @@
               <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sub-Admin</span>
             </a>
 					</li>
+          <li class="sidebar-item">
+						<a class="sidebar-link" href="/admin/user-query">
+              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">User Query</span>
+            </a>
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -70,7 +75,7 @@
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="/images/icons8-administrator-male-48.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /><span id="adminName" class="text-dark"></span>
+                <img src="/images/icons8-administrator-male-48.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /><b><span id="adminName" class="text-dark"></span></b>
 
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
@@ -93,6 +98,7 @@
 
 					<div class="row d-flex justify-content-between">
     <div class="col-xl-3 col-md-6 mb-4">
+       <a href="/admin/product-view" style="text-decoration: none;">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -108,10 +114,11 @@
                 <h1 class="mt-1 mb-3">{{productCount}}</h1>
                
             </div>
-        </div>
+        </div></a>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
+       <a href="/admin/category-view" style="text-decoration: none;">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -127,10 +134,11 @@
                 <h1 class="mt-1 mb-3">{{categoryCount}}</h1>
                 
             </div>
-        </div>
+        </div></a>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
+        <a href="/admin/tags-view" style="text-decoration: none;">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -146,11 +154,11 @@
                 <h1 class="mt-1 mb-3">{{tagCount}}</h1>
                 
             </div>
-        </div>
+        </div></a>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card">
+ <a href="/admin/sub-admin" style="text-decoration: none;">       <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -162,10 +170,10 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="mt-1 mb-3">0</h1>
+                <h1 class="mt-1 mb-3">{{subAdminCount}}</h1>
                 
             </div>
-        </div>
+        </div></a>
     </div>
 </div>
 
@@ -329,13 +337,13 @@
   }
 
   // Retrieve admin name from cookies
-  const adminName = getCookie("adminName");
+const adminName = decodeURIComponent(getCookie("adminName") || "");
 
   console.log("adminName:", adminName);  // Log adminName to verify
 
   // Set the admin name to the span with id "adminName" (if exists)
   if (adminName) {
-    document.getElementById('adminName').textContent = adminName;
+document.getElementById('adminName').textContent = decodeURIComponent(adminName);
   } else {
     console.error("Admin Name not found in cookies.");
   }

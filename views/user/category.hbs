@@ -387,7 +387,8 @@
     </script>
     <script>
   const categories = {{{categoriesJSON}}};
-const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+const productsAll = {{{allProductJSON}}}; // Make sure to pass this from backend as JSON string containing all products
+
 document.querySelectorAll('.main-cat').forEach(mainCatElem => {
   mainCatElem.addEventListener('mouseenter', function () {
     const mainCategory = this.dataset.category;
@@ -418,7 +419,7 @@ document.querySelectorAll('.main-cat').forEach(mainCatElem => {
           productMenu.style.display = 'block';
 
           // Find products matching mainCategory and subcategory
-          const matchingProducts = products.filter(p => 
+          const matchingProducts = productsAll.filter(p => 
             p.p_category === mainCategory && p.p_subcategory === sub
           );
 

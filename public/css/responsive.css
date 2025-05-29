@@ -435,7 +435,7 @@
 /* Main Contact Section */
 .home-contact-section {
   width: 100%;
-  height: 900px;
+  height: 850px;
   border: 0.5px solid #3843ab;
   border-radius: 20px;
   padding-right: 20px;
@@ -550,6 +550,7 @@
   }
   .company-record-about{
     height: 600px;
+    display: flex;
   }
   .records-first{
     margin-top: 20px;
@@ -933,7 +934,7 @@
 }
 .main-submit-btn {
   margin: auto;
-  width: 90%;
+  width: 100%;
   height: 50px;
   background: #3843ab;
   color: white;

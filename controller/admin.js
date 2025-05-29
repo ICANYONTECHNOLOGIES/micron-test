@@ -7,6 +7,7 @@ const Product=require('../model/productModel');
 const moment = require('moment');
 const { log } = require("console");
 const SubAdmin = require('../model/subAdmin')
+const UserQuery = require('../model/userQueryModel')
 
 
 
@@ -110,10 +111,11 @@ const adminController = {
 
 adminDashBoard: async (req, res) => {
   try {
-    const [productCount, categoryCount, tagCount, latestProducts] = await Promise.all([
+    const [productCount, categoryCount, tagCount,subAdminCount, latestProducts] = await Promise.all([
       Product.countDocuments(),
       Category.countDocuments(),
       Tag.countDocuments(),
+      SubAdmin.countDocuments(),
       Product.find().sort({ createdAt: -1 }).limit(8) // Fetch latest 8 products
     ]);
 const formattedProducts = latestProducts.map(product => {
@@ -128,6 +130,7 @@ console.log(formattedProducts)
       productCount,
       categoryCount,
       tagCount,
+      subAdminCount,
       formattedProducts, // Pass this to view
     });
   } catch (error) {
@@ -649,6 +652,17 @@ if (existingAdmin) {
     res.status(500).json({ message: "Internal server error." });
   }
   },
+  
+  adminDeleteSubAdmin:async(req,res)=>{
+    try {
+      const id=req.params.id
+    // Replace with your delete logic (MongoDB/Mongoose)
+    await SubAdmin.deleteOne({ _id: id });
+    res.json({ message: "Sub admin deleted successfully." });
+  } catch (err) {
+    res.status(500).json({ message: "Server error during deletion." });
+  }
+  },
 
 
   AdminChangeSubAdminPassword:async(req,res)=>{
@@ -679,6 +693,50 @@ if (existingAdmin) {
     return res.status(500).json({ message: 'Internal server error.' });
   }
   },
+
+  AddUserQuery: async(req,res)=>{
+   try {
+    console.log(req.body)
+    const newQuery = new UserQuery(req.body);
+    await newQuery.save();
+    res.status(200).json({ message: 'Query submitted successfully' });
+  } catch (error) {
+    console.error('Error saving query:', error);
+    res.status(500).json({ message: 'Server error. Please try again.' });
+  }
+  },
+
+GetUserQuery: async (req, res) => {
+
+  console.log(req.body)
+  try {
+    const allQueries = await UserQuery.find().sort({ createdAt: -1 });
+
+    const formattedUserQueries = allQueries.map(userqueries => {
+  return {
+    ...userqueries._doc,
+    formattedDate: moment(userqueries.createdAt).format('DD/MM/YYYY hh:mmA'), // e.g. 12/05/2025 02:30PM
+  };
+});
+console.log(formattedUserQueries)
+    res.render("admin/userQuery", {formattedUserQueries});
+  } catch (error) {
+    console.error("Error fetching user queries:", error);
+    res.status(500).send("Server Error");
+  }
+},
+
+
+AdminDeleteUserQuery:async(req,res)=>{
+   try {
+    await UserQuery.findByIdAndDelete(req.params.id);
+    res.json({ message: 'User query deleted successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting user query.' });
+  }
+},
+
+
 
 
 

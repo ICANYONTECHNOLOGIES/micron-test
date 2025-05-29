@@ -171,11 +171,11 @@
       <h3>growing company network</h3>
     </div>
     <div class="aboout-page-record-container company-record-about">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center align-items-center">
         <!-- Optional side spacing for large screens -->
-        <div class="col-12 col-md-10">
+        <div class="col-12">
           <div class="row">
-            <div class="col-12 col-sm-6 col-md-3 mb-4 records-first record-col">
+            <div class="col-6 col-sm-6 col-md-3 mb-4 records-first record-col">
               <div class="since-record text-center">
                 <div class="since-img">
                   <img src="images/since-icon.svg" alt="" />
@@ -184,7 +184,7 @@
                 <h3 id="year-count-about">2010</h3>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-3 mb-4 record-col">
+            <div class="col-6 col-sm-6 col-md-3 mb-4 record-col d-flex align-items-center">
               <div class="since-record text-center">
                 <div class="since-img">
                   <img src="images/customer-icon.svg" alt="" />
@@ -193,7 +193,7 @@
                 <h3 id="customer-count-about">0</h3>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-3 mb-4 record-col">
+            <div class="col-6 col-sm-6 col-md-3 mb-4 record-col">
               <div class="since-record text-center">
                 <div class="since-img">
                   <img src="images/project-icon.svg" alt="" />
@@ -202,7 +202,7 @@
                 <h3 id="project-count-about">0</h3>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-3 mb-4 record-col">
+            <div class="col-6 col-sm-6 col-md-3 mb-4 record-col">
               <div class="since-record text-center">
                 <div class="since-img">
                   <img src="images/country-icon.svg" alt="" />
@@ -404,10 +404,10 @@
 
 
 <script>
-function animateCountUp(el, start, end, duration, showPlus = false) {
+  function animateCountUp(el, start, end, duration, showPlus = false) {
   let current = start;
   const range = Math.abs(end - start);
-  const increment = range / (duration / 20); // update every 20ms
+  const increment = range / (duration / 40); // slower update (was 20)
 
   const counter = setInterval(() => {
     if (start > end) {
@@ -425,79 +425,21 @@ function animateCountUp(el, start, end, duration, showPlus = false) {
     }
 
     el.textContent = Math.floor(current) + (showPlus ? '+' : '');
-  }, 20);
+  }, 40); // slower interval (was 20)
 }
 
 const observer = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      animateCountUp(document.getElementById("year-count-about"), 2025, 2013, 1500);
-      animateCountUp(document.getElementById("customer-count-about"), 0, 10000, 1500, true);
-      animateCountUp(document.getElementById("project-count-about"), 0, 5000, 1500, true);
-      animateCountUp(document.getElementById("country-count-about"), 0, 10, 1000, true);
+      animateCountUp(document.getElementById("year-count-about"), 2025, 2013, 2500);
+      animateCountUp(document.getElementById("customer-count-about"), 0, 10000, 3000, true);
+      animateCountUp(document.getElementById("project-count-about"), 0, 5000, 3000, true);
+      animateCountUp(document.getElementById("country-count-about"), 0, 10, 2000, true);
       observer.disconnect();
     }
   });
 });
 
 observer.observe(document.querySelector(".company-record-about"));
-</script>
-<script>
-  const categories = {{{categoriesJSON}}};
-const products = {{{productsJSON}}}; // Make sure to pass this from backend as JSON string containing all products
-
-document.querySelectorAll('.main-cat').forEach(mainCatElem => {
-  mainCatElem.addEventListener('mouseenter', function () {
-    const mainCategory = this.dataset.category;
-    const category = categories.find(cat => cat.mainCategory === mainCategory);
-    const subMenu = this.nextElementSibling;
-
-    // Clear previous subcategories
-    subMenu.innerHTML = '';
-
-    if (category && Array.isArray(category.subCategories)) {
-      category.subCategories.forEach(sub => {
-        const li = document.createElement('li');
-        
-        // Each subcategory link with data attribute
-        li.innerHTML = `
-          <a class="dropdown-item sub-cat" href="#" data-main-category="${mainCategory}" data-subcategory="${sub}">${sub}</a>
-          <ul class="dropdown-menu product-menu py-0 border-0" style="border: 1px solid #0000001A; display:none;"></ul>
-        `;
-        subMenu.appendChild(li);
-
-        // Add hover event to subcategory link to load products
-        const subCatLink = li.querySelector('.sub-cat');
-        const productMenu = li.querySelector('.product-menu');
-
-        subCatLink.addEventListener('mouseenter', () => {
-          // Clear previous products
-          productMenu.innerHTML = '';
-          productMenu.style.display = 'block';
-
-          // Find products matching mainCategory and subcategory
-          const matchingProducts = products.filter(p => 
-            p.p_category === mainCategory && p.p_subcategory === sub
-          );
-
-          if (matchingProducts.length > 0) {
-            matchingProducts.forEach(product => {
-              const prodLi = document.createElement('li');
-              prodLi.innerHTML = `<a class="dropdown-item" href="/single-product/${product._id}">${product.p_name}</a>`;
-              productMenu.appendChild(prodLi);
-            });
-          } else {
-            productMenu.innerHTML = '<li class="dropdown-item disabled">No products found</li>';
-          }
-        });
-
-        // Optional: hide product submenu when mouse leaves subcategory link or submenu
-        li.addEventListener('mouseleave', () => {
-          productMenu.style.display = 'none';
-        });
-      });
-    }
-  });
-});
 
 </script>

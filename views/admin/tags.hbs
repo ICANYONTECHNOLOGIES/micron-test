@@ -45,6 +45,11 @@
             <span class="align-middle">Sub-Admin</span>
           </a>
         </li>
+         <li class="sidebar-item">
+						<a class="sidebar-link" href="/admin/user-query">
+              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">User Query</span>
+            </a>
+					</li>
       </ul>
     </div>
   </nav>
@@ -461,13 +466,13 @@ function deleteTag(tagId, productTag) {
   }
 
   // Retrieve admin name from cookies
-  const adminName = getCookie("adminName");
+const adminName = decodeURIComponent(getCookie("adminName") || "");
 
   console.log("adminName:", adminName);  // Log adminName to verify
 
   // Set the admin name to the span with id "adminName" (if exists)
   if (adminName) {
-    document.getElementById('adminName').textContent = adminName;
+document.getElementById('adminName').textContent = decodeURIComponent(adminName);
   } else {
     console.error("Admin Name not found in cookies.");
   }

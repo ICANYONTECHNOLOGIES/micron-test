@@ -94,13 +94,17 @@ getCategoryPage: async (req, res) => {
 
     // Get products only from that main category
     const products = await Product.find({ p_category: mainCategory });
+    const allProduct = await Product.find({})
 
     // Get all categories for rendering navbar/menu
     const categories = await Category.find({});
+    console.log(allProduct)
 
     res.render('user/category', {
       categories,
-      productsJSON: JSON.stringify(products),
+      productsJSON:JSON.stringify(products),
+      categoriesJSON:JSON.stringify(categories),
+      allProductJSON:JSON.stringify(allProduct),
       selectedCategory: mainCategory,
     });
   } catch (error) {
