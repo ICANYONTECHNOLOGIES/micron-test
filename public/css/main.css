@@ -781,7 +781,10 @@ box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   max-width: 246px;
   border: 0.6px solid #8f8f8f;
   border-radius: 5px;
-  background: #f9f9f9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background: #f9f9f9; */
 }
 .industries-name h5 {
   font-family: "Lato", sans-serif;
@@ -789,6 +792,7 @@ box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
+  margin-top: 9px;
 }
 .industries-name-wrapper {
   margin-top:60px;
@@ -856,7 +860,7 @@ box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 .comma-svg img {
   position: absolute;
-  right: 18px;
+  right: 51px;
   top: 15px;
 }
 /* Contact Image */
@@ -1321,6 +1325,7 @@ button:focus {
   cursor: pointer;
 
 }
+
 .product-box:hover{
 transform: translateY(-5px);
 box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -2083,3 +2088,9 @@ margin-top: 30px;
         .contact-form-wrapper-single{
           margin-top: 80px;
         }
+
+        .client-details{
+          padding-left: 72px;
+          padding-top: 19px;
+        }
+    
