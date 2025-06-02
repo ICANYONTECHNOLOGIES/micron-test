@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         bg1.style.backgroundImage = `url('${images[0]}')`;
         animateHeroText(heroTexts[0]);
         setActiveHr(0);
+
         loader.style.display = "none";
         mainHeroSection.classList.add("visible");
 
@@ -100,16 +101,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 const img = new Image();
                 img.src = src;
                 img.onload = resolve;
-                img.onerror = resolve; // resolve anyway to avoid blocking
+                img.onerror = resolve; // in case image fails to load
             });
         }));
     };
 
-    // Ensure loader doesn't stay forever (max 3s fallback)
-    Promise.race([
-        preloadAllImages(),
-        new Promise(resolve => setTimeout(resolve, 3000))
-    ]).then(() => {
+    // Start everything once all images are loaded
+    preloadAllImages().then(() => {
         startCarousel();
     });
 });
