@@ -66,44 +66,45 @@ document.addEventListener("DOMContentLoaded", function () {
     preloadImg.src = images[0];
 
     preloadImg.onload = () => {
-        const timeElapsed = Date.now() - loaderStart;
-        const remainingTime = Math.max(0, 50 - timeElapsed); // 5 sec minimum
+    const timeElapsed = Date.now() - loaderStart;
+    const remainingTime = Math.max(0, 1000 - timeElapsed); // Corrected: 5 sec minimum
 
-        setTimeout(() => {
-            // Set first image and prepare carousel
-            bg1.style.backgroundImage = `url('${images[0]}')`;
-            animateHeroText(heroTexts[0]);
-            setActiveHr(0);
+    setTimeout(() => {
+        // Set first image and prepare carousel
+        bg1.style.backgroundImage = `url('${images[0]}')`;
+        animateHeroText(heroTexts[0]);
+        setActiveHr(0);
 
-            loader.style.display = "none";
-            mainHeroSection.classList.add("visible");
+        loader.style.display = "none";
+        mainHeroSection.classList.add("visible");
 
-            let slideInterval = setInterval(changeBackground, 5000);
+        let slideInterval = setInterval(changeBackground, 1000);
 
-            numbers.forEach((dot, index) => {
-                dot.addEventListener("click", () => {
-                    clearInterval(slideInterval);
-                    if (index === currentIndex) return;
+        numbers.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                clearInterval(slideInterval);
+                if (index === currentIndex) return;
 
-                    bg2.style.backgroundImage = `url('${images[index]}')`;
-                    bg2.style.opacity = "1";
-                    numbers.forEach((num) => num.classList.remove("active"));
-                    numbers[index].classList.add("active");
+                bg2.style.backgroundImage = `url('${images[index]}')`;
+                bg2.style.opacity = "1";
+                numbers.forEach((num) => num.classList.remove("active"));
+                numbers[index].classList.add("active");
 
-                    animateHeroText(heroTexts[index]);
-                    setActiveHr(index);
+                animateHeroText(heroTexts[index]);
+                setActiveHr(index);
 
-                    setTimeout(() => {
-                        bg1.style.backgroundImage = bg2.style.backgroundImage;
-                        bg2.style.opacity = "0";
-                        currentIndex = index;
-                    }, 1500);
+                setTimeout(() => {
+                    bg1.style.backgroundImage = bg2.style.backgroundImage;
+                    bg2.style.opacity = "0";
+                    currentIndex = index;
+                }, 1500);
 
-                    slideInterval = setInterval(changeBackground, 200);
-                });
+                slideInterval = setInterval(changeBackground, 1000);
             });
-        }, remainingTime);
-    };
+        });
+    }, remainingTime);
+};
+
 });
 
 
