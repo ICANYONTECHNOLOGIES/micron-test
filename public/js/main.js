@@ -59,26 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1500);
     }
 
-    // Start time for loader
-    const loaderStart = Date.now();
-
-    const preloadImg = new Image();
-    preloadImg.src = images[0];
-
-    preloadImg.onload = () => {
-    const timeElapsed = Date.now() - loaderStart;
-    const remainingTime = Math.max(0, 1000 - timeElapsed); // Corrected: 5 sec minimum
-
-    setTimeout(() => {
+    function startCarousel() {
         // Set first image and prepare carousel
         bg1.style.backgroundImage = `url('${images[0]}')`;
         animateHeroText(heroTexts[0]);
         setActiveHr(0);
-
         loader.style.display = "none";
         mainHeroSection.classList.add("visible");
 
-        let slideInterval = setInterval(changeBackground, 1000);
+        let slideInterval = setInterval(changeBackground, 5000);
 
         numbers.forEach((dot, index) => {
             dot.addEventListener("click", () => {
@@ -99,12 +88,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentIndex = index;
                 }, 1500);
 
-                slideInterval = setInterval(changeBackground, 1000);
+                slideInterval = setInterval(changeBackground, 5000);
             });
         });
-    }, remainingTime);
-};
+    }
 
+    // Preload all images
+    const preloadAllImages = () => {
+        return Promise.all(images.map(src => {
+            return new Promise(resolve => {
+                const img = new Image();
+                img.src = src;
+                img.onload = resolve;
+                img.onerror = resolve; // resolve anyway to avoid blocking
+            });
+        }));
+    };
+
+    // Ensure loader doesn't stay forever (max 3s fallback)
+    Promise.race([
+        preloadAllImages(),
+        new Promise(resolve => setTimeout(resolve, 3000))
+    ]).then(() => {
+        startCarousel();
+    });
 });
 
 
