@@ -33,7 +33,7 @@
           <div class="compay-logo">
             <a class="navbar-brand d-flex align-items-end" href="#">
               <img src="images/micron-logo.svg" class="img-fluid" alt="" />
-              <h1 class="compay-name" style="z-index: 0;">MICRON ELECTRIC</h1>
+              <h1 class="compay-name text-white" style="z-index: 0;">MICRON ELECTRIC</h1>
             </a>
           </div>
           <button
@@ -203,7 +203,7 @@
               the manufacturing and supply of premium electrical components,
               built to power performance and ensure safety.
             </p>
-            <button class="home-btn">Know more</button>
+            <a href="/about-us"><button class="home-btn">Know more</button></a>
           </div>
 
         </div>
@@ -234,17 +234,16 @@
         <!--  Only ONE container -->
        <div class="carousel-container">
   <div class="carousel-wrapper">
-   <div class="carousel" id="carousel">
-  {{#each categories}}
-    <div class="box" onclick="goToCategory('{{mainCategory}}')">
-      <div class="carousel-img">
-        <img src="{{imageUrl}}" alt="{{mainCategory}}" />
-        <h5 class="carousel-title ps-1">{{mainCategory}}</h5>
-      </div>
+    <div class="carousel" id="carousel">
+      {{#each categories}}
+        <div class="box" onclick="goToCategory('{{mainCategory}}')">
+          <div class="carousel-img">
+            <img src="{{imageUrl}}" alt="{{mainCategory}}" />
+            <h5 class="carousel-title ps-1">{{mainCategory}}</h5>
+          </div>
+        </div>
+      {{/each}}
     </div>
-  {{/each}}
-</div>
-
   </div>
 </div>
 
@@ -366,9 +365,9 @@
 
       </div>
 
-      <div class="discover-product-btn d-flex justify-content-end">
+      {{!-- <div class="discover-product-btn d-flex justify-content-end">
         <button class="discover-product-button">See more</button>
-      </div>
+      </div> --}}
     </div>
   </div>
 </section>
@@ -481,11 +480,7 @@
     <div class="container">
       <div class="industries-title">
         <h2>OUR industries</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries.</p>
+        <p>At Micron Electric, our expertise extends across a wide range of industries where precision, safety, and reliability are critical. Our solutions are engineered to meet the highest standards of performance across diverse sectors, helping businesses operate efficiently and securely.</p>
       </div>
       <div class="industries-name-wrapper">
         <div class="row">
@@ -495,7 +490,7 @@
 ">
              
             </div>
-             <div class="industries-name text-center">
+             <div class="industries-name">
                 <h5>Switchgear manufacturing</h5>
               </div>
           </div>
@@ -559,9 +554,9 @@
                 quality in LV switchgear and electrical components. Here’s what
                 a few of them had to say:</p>
             </div>
-            <div class="feedback-btn">
+            {{!-- <div class="feedback-btn">
               <button>See more</button>
-            </div>
+            </div> --}}
           </div>
         </div>
         <div class="col-md-6 feedback-section">
@@ -720,13 +715,12 @@
           <div class="quick-link-title">
             <h5>QUICK LINKS</h5>
           </div>
-          <div class="quick-links">
+          <div class="quick-links ">
             <ul>
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Products</li>
-              <li>Downloads</li>
-              <li>Contact Us</li>
+              <li><a href="/" class="text-decoration-none text-white">Home</a></li>
+              <li><a href="/about-us" class="text-decoration-none text-white">About Us</a></li>
+              <li><a href="/downloads" class="text-decoration-none text-white">Downloads</a></li>
+              <li><a href="/contact-us" class="text-decoration-none text-white">Contact Us</a></li>
             </ul>
           </div>
           </div>
@@ -743,7 +737,8 @@
               </li>
               <li class="address-1 d-flex">
                 <img src="images/image 57.svg" alt="">
-                <h6>sales@micronelectric.co.uk</h6>
+                <h6><a href="mailto:sales@micronelectric.co.uk" class="text-decoration-none text-white">sales@micronelectric.co.uk</a></h6>
+
               </li>
               </ul>
             </div>
@@ -831,10 +826,16 @@ if (!query) {
       return matchQuery && matchCategory;
     });
 
-    if (!match) {
-      alert('No matching product found');
-      return;
-    }
+   if (!match) {
+  Swal.fire({
+    icon: 'warning',
+    title: 'No Match Found',
+    text: 'No matching product found',
+    confirmButtonText: 'OK'
+  });
+  return;
+}
+
 
     // API call
     window.location.href = `single-product/${match._id}`;
@@ -1041,11 +1042,12 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     // ========== 💻 DESKTOP = Infinite Loop ==========
     const originalBoxes = Array.from(items);
-    const boxWidth = 310; // fixed value (box + margin)
+    const visibleCount = 4;
+    const boxWidth = carousel.offsetWidth / visibleCount;
     const originalCount = originalBoxes.length;
     let index = originalCount;
 
-    // Clone to left & right if more than 1 item
+    // Clone left and right
     if (originalCount > 1) {
       originalBoxes.forEach(box => {
         const clone = box.cloneNode(true);
@@ -1094,6 +1096,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+
 
 <script>
   const categories = {{{categoriesJSON}}};

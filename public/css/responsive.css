@@ -179,7 +179,7 @@
   margin-top: 10px;
 }
 .box {
-  flex: 0 0 80%;
+  flex: 0 0 95%;
   max-width: 100%;
   box-sizing: border-box;
   height: 300px;
@@ -188,6 +188,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.carousel-img img {
+  width:320px !important;
+  height: 227px !important;
+  border-radius: 5PX;
 }
 .carousel-title {
   font-family: "Lato", sans-serif;
@@ -437,11 +442,15 @@
 }
 .client-feedback p {
   font-family: "Lato", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   color: #999999;
   line-height: 110%;
 }
+   .client-details{
+          padding-left: 20px;
+          padding-top: 25px;
+        }
 .contact-title h3 {
   font-family: "Oswald", sans-serif;
   font-size: 24px;
@@ -953,7 +962,7 @@
 }
 .main-submit-btn {
   margin: auto;
-  width:316px;
+  width:100%;
   height: 50px;
   background: #3843ab;
   color: white;
@@ -968,9 +977,29 @@
 }       .contact-form-wrapper-single{
           margin-top: 40px;
         }
+.contact-details-section{
+  margin-left: 0px;
+  margin-top: 40px;
+}
+.contact-details-title h5{
+   font-family: "Oswald", sans-serif;
+  font-size:22px;
+  font-weight: 500px;
+  color: #3843AB;
+ 
+ 
+}
+.contact-details-title p{
+    font-family: "Lato", sans-serif;
+  font-size:16px;
+  font-weight: 300;
+  line-height: 150%;
 
+}
 
-
+.compay-name{
+  color: black !important;
+}
 
 
 
@@ -1044,7 +1073,7 @@
         font-weight: 400;
       }
       .box {
-        flex: 0 0 calc(25% - -21px); /* Adjusted for 10px gap between 4 items */
+        flex: 0 0 calc(25% - 10px); /* Adjusted for 10px gap between 4 items */
         height: 322px;
         border: 1px solid black;
         background: #ffffff;
@@ -1060,6 +1089,11 @@
       .vision-row {
         padding-top: 10px;
       }
+      .carousel-img img {
+  width: 250px !important;
+  height: 227px !important;
+  border-radius: 5PX;
+}
   
 
     }
@@ -1085,7 +1119,7 @@
         font-weight: 400;
       }
       .box {
-        flex: 0 0 calc(30% - -20px); /* Adjusted for 10px gap between 4 items */
+        flex: 0 0 calc(25% - 10px); /* Adjusted for 10px gap between 4 items */
         height: 322px;
         border: 1px solid black;
         background: #ffffff;
@@ -1098,6 +1132,11 @@
         position: relative;
         z-index: 1;
       }
+            .carousel-img img {
+  width: 205px !important;
+  height: 227px !important;
+  border-radius: 5PX;
+}
       .section-text {
         font-family: "Lato", sans-serif;
         font-size: 18px;

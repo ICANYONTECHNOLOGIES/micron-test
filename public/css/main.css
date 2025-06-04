@@ -174,7 +174,7 @@ body {
 
 
 .carousel-img img {
-  width: 270px !important;
+  width: 280px !important;
   height: 227px !important;
   border-radius: 5PX;
 }
@@ -474,7 +474,7 @@ body {
   position: relative;
   overflow-x: hidden; /* Only hide horizontal overflow */
   overflow-y: visible; /* Allow vertical overflow */
-  /* max-width: 1230px; */
+  max-width:100%;
   width: 100%;
   margin: auto;
   z-index: 1;
@@ -498,9 +498,10 @@ body {
   padding-top: 30px; /* Add padding for hover effect to be visible upward */
 }
 
+
 /* Each item inside the carousel */
 .box {
-  flex: 0 0 calc(25% - 7.5px); /* Adjusted for 10px gap between 4 items */
+  flex: 0 0 calc(25% - 10px); /* Adjusted for 10px gap between 4 items */
   height: 322px;
   border: 1px solid black;
   background: #ffffff;
@@ -1610,6 +1611,46 @@ box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   height: 91px;
   border: 0.5px solid #A9A9A9;
   backdrop-filter: blur(1px);
+  
+
+}
+.contact-details-section{
+  margin-left: 96px;
+}
+.email-content h6{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+
+}
+.details-box-address{
+  max-width: 100%;
+  height: 91px;
+  border: 0.5px solid #A9A9A9;
+  backdrop-filter: blur(1px);
+    font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+
+}
+.email-content img,.address-content img{
+width:25px;
+  height: 25px;
+}
+.contact-details-title h5{
+   font-family: "Oswald", sans-serif;
+  font-size:32px;
+  font-weight: 500px;
+  color: #3843AB;
+ 
+ 
+}
+.contact-details-title p{
+    font-family: "Lato", sans-serif;
+  font-size:20px;
+  font-weight: 300;
+  line-height: 150%;
 
 }
 .contact-title{
@@ -2089,7 +2130,12 @@ margin-top: 30px;
         }
 
         .client-details{
-          padding-left: 72px;
+          padding-left: 30px;
           padding-top: 19px;
         }
-    
+       .zoom-image {
+        border: 1px solid;
+        border-color: #007bff;
+        border-radius: 5px;
+
+       }
