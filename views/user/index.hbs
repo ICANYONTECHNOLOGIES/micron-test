@@ -234,16 +234,17 @@
         <!--  Only ONE container -->
        <div class="carousel-container">
   <div class="carousel-wrapper">
-    <div class="carousel" id="carousel">
-      {{#each categories}}
-        <div class="box" onclick="goToCategory('{{mainCategory}}')">
-          <div class="carousel-img">
-            <img src="{{imageUrl}}" alt="{{mainCategory}}" />
-            <h5 class="carousel-title ps-1">{{mainCategory}}</h5>
-          </div>
-        </div>
-      {{/each}}
+   <div class="carousel" id="carousel">
+  {{#each categories}}
+    <div class="box" onclick="goToCategory('{{mainCategory}}')">
+      <div class="carousel-img">
+        <img src="{{imageUrl}}" alt="{{mainCategory}}" />
+        <h5 class="carousel-title ps-1">{{mainCategory}}</h5>
+      </div>
     </div>
+  {{/each}}
+</div>
+
   </div>
 </div>
 
@@ -494,7 +495,7 @@
 ">
              
             </div>
-             <div class="industries-name">
+             <div class="industries-name text-center">
                 <h5>Switchgear manufacturing</h5>
               </div>
           </div>

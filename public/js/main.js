@@ -59,49 +59,57 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1500);
     }
 
-    // Start time for loader
-    const loaderStart = Date.now();
+    function initHero(index) {
+        bg1.style.backgroundImage = `url('${images[index]}')`;
+        animateHeroText(heroTexts[index]);
+        setActiveHr(index);
 
+        loader.style.display = "none";
+        mainHeroSection.classList.add("visible");
+
+        let slideInterval = setInterval(changeBackground, 5000);
+
+        numbers.forEach((dot, idx) => {
+            dot.addEventListener("click", () => {
+                clearInterval(slideInterval);
+                if (idx === currentIndex) return;
+
+                bg2.style.backgroundImage = `url('${images[idx]}')`;
+                bg2.style.opacity = "1";
+                numbers.forEach((num) => num.classList.remove("active"));
+                numbers[idx].classList.add("active");
+
+                animateHeroText(heroTexts[idx]);
+                setActiveHr(idx);
+
+                setTimeout(() => {
+                    bg1.style.backgroundImage = bg2.style.backgroundImage;
+                    bg2.style.opacity = "0";
+                    currentIndex = idx;
+                }, 1500);
+
+                slideInterval = setInterval(changeBackground, 5000);
+            });
+        });
+    }
+
+    // Start loading timer
+    const loaderStart = Date.now();
     const preloadImg = new Image();
     preloadImg.src = images[0];
 
+    // Fallback: hide loader after 5 seconds even if image doesn't load
+    const maxWait = setTimeout(() => {
+        initHero(0); // Proceed even without image load
+    }, 5000);
+
     preloadImg.onload = () => {
+        clearTimeout(maxWait); // Cancel fallback if loaded in time
         const timeElapsed = Date.now() - loaderStart;
-        const remainingTime = Math.max(0, 1000 - timeElapsed); // 5 sec minimum
+        const remainingTime = Math.max(0, 1000 - timeElapsed);
 
         setTimeout(() => {
-            // Set first image and prepare carousel
-            bg1.style.backgroundImage = `url('${images[0]}')`;
-            animateHeroText(heroTexts[0]);
-            setActiveHr(0);
-
-            loader.style.display = "none";
-            mainHeroSection.classList.add("visible");
-
-            let slideInterval = setInterval(changeBackground, 5000);
-
-            numbers.forEach((dot, index) => {
-                dot.addEventListener("click", () => {
-                    clearInterval(slideInterval);
-                    if (index === currentIndex) return;
-
-                    bg2.style.backgroundImage = `url('${images[index]}')`;
-                    bg2.style.opacity = "1";
-                    numbers.forEach((num) => num.classList.remove("active"));
-                    numbers[index].classList.add("active");
-
-                    animateHeroText(heroTexts[index]);
-                    setActiveHr(index);
-
-                    setTimeout(() => {
-                        bg1.style.backgroundImage = bg2.style.backgroundImage;
-                        bg2.style.opacity = "0";
-                        currentIndex = index;
-                    }, 1500);
-
-                    slideInterval = setInterval(changeBackground, 200);
-                });
-            });
+            initHero(0); // Initialize carousel after remaining wait
         }, remainingTime);
     };
 });
