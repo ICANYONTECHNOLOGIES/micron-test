@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const images = [
-    "/images/image (25).png",
-    "/images/image (26).png",
-    "/images/image (27).png",
-    "/images/image (28).png",
-    "/images/image (29).png"
+        "/images/image (25).png",
+        "/images/image (26).png",
+        "/images/image (27).png",
+        "/images/image (28).png",
+        "/images/image (29).png"
     ];
 
     const heroTexts = [
@@ -59,51 +59,49 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1500);
     }
 
-    // Start time for loader
-    const loaderStart = Date.now();
+    // ✅ Preload all images before showing anything
+    let loadedCount = 0;
+    images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+            loadedCount++;
+            if (loadedCount === images.length) {
+                // 🎯 All images loaded — now show content immediately
+                bg1.style.backgroundImage = `url('${images[0]}')`;
+                animateHeroText(heroTexts[0]);
+                setActiveHr(0);
 
-    const preloadImg = new Image();
-    preloadImg.src = images[0];
+                loader.style.display = "none";
+                mainHeroSection.classList.add("visible");
 
-    preloadImg.onload = () => {
-        const timeElapsed = Date.now() - loaderStart;
-        const remainingTime = Math.max(0, 500 - timeElapsed); // 5 sec minimum
+                let slideInterval = setInterval(changeBackground, 5000);
 
-        setTimeout(() => {
-            // Set first image and prepare carousel
-            bg1.style.backgroundImage = `url('${images[0]}')`;
-            animateHeroText(heroTexts[0]);
-            setActiveHr(0);
+                numbers.forEach((dot, index) => {
+                    dot.addEventListener("click", () => {
+                        clearInterval(slideInterval);
+                        if (index === currentIndex) return;
 
-            loader.style.display = "none";
-            mainHeroSection.classList.add("visible");
+                        bg2.style.backgroundImage = `url('${images[index]}')`;
+                        bg2.style.opacity = "1";
+                        numbers.forEach((num) => num.classList.remove("active"));
+                        numbers[index].classList.add("active");
 
-            let slideInterval = setInterval(changeBackground, 5000);
+                        animateHeroText(heroTexts[index]);
+                        setActiveHr(index);
 
-            numbers.forEach((dot, index) => {
-                dot.addEventListener("click", () => {
-                    clearInterval(slideInterval);
-                    if (index === currentIndex) return;
+                        setTimeout(() => {
+                            bg1.style.backgroundImage = bg2.style.backgroundImage;
+                            bg2.style.opacity = "0";
+                            currentIndex = index;
+                        }, 1500);
 
-                    bg2.style.backgroundImage = `url('${images[index]}')`;
-                    bg2.style.opacity = "1";
-                    numbers.forEach((num) => num.classList.remove("active"));
-                    numbers[index].classList.add("active");
-
-                    animateHeroText(heroTexts[index]);
-                    setActiveHr(index);
-
-                    setTimeout(() => {
-                        bg1.style.backgroundImage = bg2.style.backgroundImage;
-                        bg2.style.opacity = "0";
-                        currentIndex = index;
-                    }, 1500);
-
-                    slideInterval = setInterval(changeBackground, 200);
+                        slideInterval = setInterval(changeBackground, 5000);
+                    });
                 });
-            });
-        }, remainingTime);
-    };
+            }
+        };
+    });
 });
 
 
