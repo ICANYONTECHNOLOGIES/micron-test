@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - BHS Portal</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -116,12 +115,12 @@
 <body>
     <div class="login-container">
         <div class="header">
-            <img src="images/Group 80.svg" alt="BHS Logo" class="logo">
+            <img src="/images/Group 80.svg" alt="BHS Logo" class="logo">
             <h1>{{pageTitle}}</h1>
         </div>
         
         {{#if message}}
-        <div class="error-message">
+        <div class="error-message text-danger">
             {{message}}
         </div>
         {{/if}}
@@ -141,10 +140,6 @@
             
             <button type="submit" class="login-button">Log In</button>
         </form>
-        
-        <div class="forgot-password">
-            <a href="{{forgotPasswordUrl}}">Forgot password?</a>
-        </div>
     </div>
 
    
