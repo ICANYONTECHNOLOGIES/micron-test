@@ -126,7 +126,7 @@ body {
 
 .carousel-background {
   z-index: -2;
-  background-image: url("../images/image\ \(2\).svg"); /* Initial image */
+  background-image: url("../images/hero-carousel-1.svg"); /* Initial image */
 }
 
 .carousel-background-next {

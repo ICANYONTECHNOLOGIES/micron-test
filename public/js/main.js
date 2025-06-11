@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "../images/hero-carousel-3.svg",
         "../images/hero-carousel-4.svg",
         "../images/hero-carousel-5.svg",
-        "../images/hero-carousel-1.svg",
     ];
 
     const heroTexts = [
