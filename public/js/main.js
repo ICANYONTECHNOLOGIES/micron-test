@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const images = [
-        "/images/image (25).png",
-        "/images/image (26).png",
-        "/images/image (27).png",
-        "/images/image (28).png",
-        "/images/image (29).png"
+        "../images/image (2).svg",
+        "../images/image (3).svg",
+        "../images/image (4).svg",
+        "../images/image (2).svg",
+        "../images/image (3).svg"
     ];
 
     const heroTexts = [
