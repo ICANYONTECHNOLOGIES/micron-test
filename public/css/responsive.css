@@ -76,6 +76,7 @@
     margin: 41px auto;
     border: none;
   }
+
   .search-input::placeholder {
   font-family: "Lato", sans-serif;
   font-size: 12px;
@@ -86,7 +87,7 @@
   .category-select,
   .search-input,
   .search-button {
-    padding: 0px;
+    padding: 10px;
     margin: 0;
     font-size: 10px;
     height: 46px;
@@ -577,7 +578,7 @@
     margin-top: 20px;
   }
   .company-record-about{
-    height: 600px;
+    height: 430px;
     display: flex;
   }
   .records-first{
