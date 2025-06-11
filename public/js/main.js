@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const images = [
         "../images/hero-carousel-1.svg",
         "../images/hero-carousel-2.svg",
-        "../images/hero-carousel-3.svg",
-        "../images/hero-carousel-4.svg",
-        "../images/hero-carousel-5.svg",
+        "../images/hero-carousel-1.svg",
+        "../images/hero-carousel-2.svg",
+        "../images/hero-carousel-1.svg",
     ];
 
     const heroTexts = [
@@ -59,52 +59,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1500);
     }
 
-    // Start time for loader
-    const loaderStart = Date.now();
-
+    // Preload first image
     const preloadImg = new Image();
     preloadImg.src = images[0];
 
-    preloadImg.onload = () => {
-        const timeElapsed = Date.now() - loaderStart;
-        const remainingTime = Math.max(0, 2000 - timeElapsed); // 5 sec minimum
+    const imageLoaded = new Promise((resolve) => {
+        preloadImg.onload = resolve;
+    });
 
-        setTimeout(() => {
-            // Set first image and prepare carousel
-            bg1.style.backgroundImage = `url('${images[0]}')`;
-            animateHeroText(heroTexts[0]);
-            setActiveHr(0);
+    const timeoutReached = new Promise((resolve) => {
+        setTimeout(resolve, 4000); // 4 seconds
+    });
 
-            loader.style.display = "none";
-            mainHeroSection.classList.add("visible");
+    Promise.race([imageLoaded, timeoutReached]).then(() => {
+        // Set first image and prepare carousel
+        bg1.style.backgroundImage = `url('${images[0]}')`;
+        animateHeroText(heroTexts[0]);
+        setActiveHr(0);
 
-            let slideInterval = setInterval(changeBackground, 5000);
+        loader.style.display = "none";
+        mainHeroSection.classList.add("visible");
 
-            numbers.forEach((dot, index) => {
-                dot.addEventListener("click", () => {
-                    clearInterval(slideInterval);
-                    if (index === currentIndex) return;
+        let slideInterval = setInterval(changeBackground, 5000);
 
-                    bg2.style.backgroundImage = `url('${images[index]}')`;
-                    bg2.style.opacity = "1";
-                    numbers.forEach((num) => num.classList.remove("active"));
-                    numbers[index].classList.add("active");
+        numbers.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                clearInterval(slideInterval);
+                if (index === currentIndex) return;
 
-                    animateHeroText(heroTexts[index]);
-                    setActiveHr(index);
+                bg2.style.backgroundImage = `url('${images[index]}')`;
+                bg2.style.opacity = "1";
+                numbers.forEach((num) => num.classList.remove("active"));
+                numbers[index].classList.add("active");
 
-                    setTimeout(() => {
-                        bg1.style.backgroundImage = bg2.style.backgroundImage;
-                        bg2.style.opacity = "0";
-                        currentIndex = index;
-                    }, 1500);
+                setActiveHr(index);
 
-                    slideInterval = setInterval(changeBackground, 200);
-                });
+                setTimeout(() => {
+                    bg1.style.backgroundImage = bg2.style.backgroundImage;
+                    bg2.style.opacity = "0";
+                    currentIndex = index;
+                }, 1500);
+
+                slideInterval = setInterval(changeBackground, 8000);
             });
-        }, remainingTime);
-    };
+        });
+    });
 });
+
 
 
 
