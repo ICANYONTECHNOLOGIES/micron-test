@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const images = [
-        "../images/hero-carousel-2.svg",
+        "../images/gg.png",
         "../images/hero-carousel-3.svg",
         "../images/hero-carousel-2.svg",
         "../images/hero-carousel-3.svg",
