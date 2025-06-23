@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "../images/ghh.png",
         "../images/iiii.png",
         "../images/yyy.png",
-        "../images/hero-carousel-2.svg",
+        "../images/gg.png",
     ];
 
     const heroTexts = [

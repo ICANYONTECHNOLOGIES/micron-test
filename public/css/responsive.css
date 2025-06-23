@@ -2,10 +2,24 @@
 @media (max-width: 575.98px) {
     .main-hero-section {
         width: 100%;
-        height: 90vh;
+        height: 70vh;
         position: relative;
         overflow: hidden;
       }
+    .carousel-background,
+.carousel-background-next {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  /* make it fill 100% of the viewport width, and 80vh height */
+  background-size: calc(100vw) calc(54vh);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 1.5s ease;
+}
+
     .navbar {
         padding: 20px 0 10px 0;
         position: relative;
@@ -55,7 +69,7 @@
 .carousel-number {
     position: absolute;
     right: 10px;
-    top:20%;
+    top:25%;
     transform: translateY(-50%);
     z-index: 1;
   }
@@ -111,7 +125,7 @@
   }
   .single-quates-section-sm{
     width: 100%;
-    height: 80px;
+    height: 75px;
     background: #3843ab;
     position: absolute;
     bottom: 0;
