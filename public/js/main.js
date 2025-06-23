@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const images = [
         "../images/gg.png",
-        "../images/hero-carousel-3.svg",
-        "../images/hero-carousel-2.svg",
-        "../images/hero-carousel-3.svg",
+        "../images/ghh.png",
+        "../images/iiii.png",
+        "../images/yyy.png",
         "../images/hero-carousel-2.svg",
     ];
 
