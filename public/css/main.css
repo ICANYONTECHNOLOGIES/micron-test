@@ -504,7 +504,7 @@ body {
   flex: 0 0 calc(25% - 10px); /* Adjusted for 10px gap between 4 items */
   height: 322px;
   border: 1px solid black;
-  background: #ffffff;
+  background:#EFEEEE;
   display: flex;
   align-items: center;
   justify-content: center;
