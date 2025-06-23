@@ -2,7 +2,7 @@
 @media (max-width: 575.98px) {
     .main-hero-section {
         width: 100%;
-        height: 70vh;
+        height:45vh;
         position: relative;
         overflow: hidden;
       }
@@ -14,7 +14,8 @@
   width: 100vw;
   height: 100%;
   /* make it fill 100% of the viewport width, and 80vh height */
-  background-size: calc(100vw) calc(54vh);
+  /* background-size: calc(100vw) calc(54vh); */
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   transition: opacity 1.5s ease;
